@@ -128,3 +128,16 @@
         padding: 0;
     }
 }
+
+/* 7. Logo 高清化優化 */
+.gh-head-logo img {
+    width: auto;
+    height: 40px;
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .gh-head-logo img {
+        height: 32px; /* 手機版略微縮小以節省空間 */
+    }
+}
