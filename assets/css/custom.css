@@ -19,44 +19,65 @@
 .nav-youtube a::before {content: "\f167"}
 
 /* 1. 全局 Footer 容器優化 */
-.gh-foot, 
-.site-footer-disclaimer {
+.gh-foot {
     background-color: #14467c !important; 
     width: 100%;
     box-sizing: border-box;
+    padding: 60px 0 40px;
 }
 
-.site-footer-disclaimer {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 40px 0 60px;
-}
-
-/* 2. 內容容器佈局 */
-.footer-inner-container {
+.site-footer-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
     text-align: center;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #ffffff;
 }
 
-/* 3. 連結樣式優化 */
+/* 2. 社交圖標水平佈局 */
+.footer-social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.footer-social-links a {
+    color: #ffffff !important;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+}
+
+.footer-social-links a:hover {
+    opacity: 0.8;
+}
+
+.footer-social-links svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* 3. 法律連結樣式 */
 .footer-legal-links {
-    margin-bottom: 25px;
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.3);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 15px; /* 使用 CSS gap 控制間距 */
+    gap: 15px 25px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .footer-legal-links a {
     color: #ffffff !important;
     text-decoration: none;
-    display: inline-block;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s ease;
 }
 
 .footer-legal-links a:hover {
@@ -64,36 +85,46 @@
     text-decoration: underline;
 }
 
-/* 4. 免責聲明與版權文字 */
+/* 4. 免責聲明文字優化 (Responsive Fix) */
+.footer-disclaimer {
+    margin-bottom: 24px;
+    padding: 0 20px;
+}
+
 .disclaimer-text {
     font-size: 12px;
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.95) !important; 
+    color: rgba(255, 255, 255, 0.9) !important; 
     max-width: 850px;
-    margin: 0 auto 20px auto;
+    margin: 0 auto;
+    text-align: center;
+    white-space: normal;
     word-break: break-word;
 }
 
+/* 5. 版權文字 */
 .footer-copyright {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.8) !important; 
+    color: rgba(255, 255, 255, 0.6) !important; 
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
-/* 5. 手機版適應 (RWD) */
+/* 6. 手機版適應 (RWD) */
 @media (max-width: 767px) {
-    .site-footer-disclaimer {
-        padding: 30px 0 50px;
+    .gh-foot {
+        padding: 40px 0 30px;
+    }
+    .footer-social-links {
+        gap: 15px;
     }
     .footer-legal-links {
-        gap: 8px 15px;
-    }
-    .footer-legal-links a {
+        gap: 10px 15px;
         font-size: 13px;
     }
     .disclaimer-text {
         font-size: 11px;
-        text-align: justify;
+        text-align: center;
+        padding: 0;
     }
 }

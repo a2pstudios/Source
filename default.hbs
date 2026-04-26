@@ -92,27 +92,35 @@
             {{/unless}}
             {{/if}}
 
-            <nav class="gh-foot-menu">
-                {{navigation type="secondary"}}
-            </nav>
+            <div class="site-footer-container">
+                <div class="footer-social-links">
+                    {{#if @site.facebook}}
+                        <a href="{{facebook_url @site.facebook}}" target="_blank" rel="noopener" aria-label="Facebook">{{> "icons/facebook"}}</a>
+                    {{/if}}
+                    {{#if @site.twitter}}
+                        <a href="{{twitter_url @site.twitter}}" target="_blank" rel="noopener" aria-label="Twitter">{{> "icons/twitter"}}</a>
+                    {{/if}}
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">{{> "icons/instagram"}}</a>
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Youtube">{{> "icons/youtube"}}</a>
+                    <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">{{> "icons/tiktok"}}</a>
+                </div>
 
-            <div class="site-footer-disclaimer">
-                <div class="footer-inner-container">
-                    <div class="footer-legal-links">
-                        <a href="https://fqpedia.com/about/">關於FQpedia</a>
-                        <a href="https://fqpedia.com/#/portal/">註冊會員</a>
-                        <a href="/terms/">使用條款</a>
-                        <a href="/privacy/">私隱政策</a>
-                        <a href="/contact/">聯絡我們</a>
-                    </div>
-                    
+                <nav class="footer-legal-links">
+                    <a href="https://fqpedia.com/about/">關於FQpedia</a>
+                    <a href="https://fqpedia.com/#/portal/">註冊會員</a>
+                    <a href="/terms/">使用條款</a>
+                    <a href="/privacy/">私隱政策</a>
+                    <a href="/contact/">聯絡我們</a>
+                </nav>
+
+                <div class="footer-disclaimer">
                     <p class="disclaimer-text">
                         免責聲明：本網頁刊載的所有投資技巧及分析，僅供參考用途。讀者作出任何投資決定前，要自行判斷及審慎處理，更要自行掌握市場最新變化。若不幸招致任何損失，概與本網頁及相關作者與受訪者無關，本網頁概不負責。
                     </p>
+                </div>
 
-                    <div class="footer-copyright">
-                        © 2025-2026 FQpedia. All rights reserved.
-                    </div>
+                <div class="footer-copyright">
+                    © 2025-2026 FQpedia. All rights reserved.
                 </div>
             </div>
         </div>
