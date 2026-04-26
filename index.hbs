@@ -3,23 +3,23 @@
 <main class="gh-main gh-outer">
     <div class="gh-inner">
 
-        {{!-- 1. Hero Section --}}
-        <section class="fq-hero">
-            {{#get "posts" include="authors,tags" limit="5" as |hero_posts|}}
+        {{!-- 1. Hero Grid Section --}}
+        <section class="fq-hero-grid">
+            {{#get "posts" include="authors,tags" limit="4" as |hero_posts|}}
                 {{#foreach hero_posts}}
                     {{#if @first}}
-                        {{!-- Left: Large Featured Card --}}
-                        <div class="fq-hero-left">
-                            <article class="fq-hero-post-large {{post_class}}">
+                        {{!-- Left Side: Large Main Post --}}
+                        <div class="fq-main-post">
+                            <article class="fq-hero-post-large">
                                 <a class="fq-hero-post-link" href="{{url}}">
                                     {{#if feature_image}}
                                         <img class="fq-hero-post-image" src="{{img_url feature_image size="xl"}}" alt="{{title}}">
                                     {{/if}}
                                     <div class="fq-hero-post-content">
                                         <div class="fq-hero-post-tags">
-                                            {{#foreach tags limit="2"}}
-                                                <span class="fq-tag">{{name}}</span>
-                                            {{/foreach}}
+                                            {{#if primary_tag}}
+                                                <span class="fq-tag">{{primary_tag.name}}</span>
+                                            {{/if}}
                                         </div>
                                         <h2 class="fq-hero-post-title">{{title}}</h2>
                                         <div class="fq-hero-post-meta">
@@ -30,9 +30,9 @@
                                 </a>
                             </article>
                         </div>
-                        <div class="fq-hero-right">
+                        <div class="fq-sidebar-posts">
                     {{else}}
-                        {{!-- Right: Sidebar List --}}
+                        {{!-- Right Side: 3 Vertical Small Posts --}}
                         <article class="fq-hero-post-small">
                             <a class="fq-hero-post-small-link" href="{{url}}">
                                 {{#if feature_image}}
@@ -57,7 +57,7 @@
             {{/get}}
         </section>
 
-        {{!-- 2. Collection Sections (Categories) --}}
+        {{!-- 2. Collection Sections --}}
         {{#get "tags" limit="4" include="count.posts" order="count.posts desc"}}
             {{#foreach tags}}
                 <section class="fq-collection">

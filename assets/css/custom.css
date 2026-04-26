@@ -34,7 +34,6 @@
     color: #ffffff;
 }
 
-/* 2. 社交圖標水平佈局 */
 .footer-social-links {
     display: flex;
     justify-content: center;
@@ -63,7 +62,6 @@
     fill: currentColor;
 }
 
-/* 3. 法律連結樣式 */
 .footer-legal-links {
     display: flex;
     justify-content: center;
@@ -85,7 +83,6 @@
     text-decoration: underline;
 }
 
-/* 4. 免責聲明文字優化 (Responsive Fix) */
 .footer-disclaimer {
     margin-bottom: 24px;
     padding: 0 20px;
@@ -102,31 +99,11 @@
     word-break: break-word;
 }
 
-/* 5. 版權文字 */
 .footer-copyright {
     font-size: 11px;
     color: rgba(255, 255, 255, 0.6) !important; 
     letter-spacing: 0.05em;
     text-transform: uppercase;
-}
-
-/* 6. 手機版適應 (RWD) */
-@media (max-width: 767px) {
-    .gh-foot {
-        padding: 40px 0 30px;
-    }
-    .footer-social-links {
-        gap: 15px;
-    }
-    .footer-legal-links {
-        gap: 10px 15px;
-        font-size: 13px;
-    }
-    .disclaimer-text {
-        font-size: 11px;
-        text-align: center;
-        padding: 0;
-    }
 }
 
 /* 7. Logo 高清化優化 */
@@ -136,31 +113,21 @@
     display: block;
 }
 
-@media (max-width: 767px) {
-    .gh-head-logo img {
-        height: 32px; /* 手機版略微縮小以節省空間 */
-    }
-}
-
-/* ==========================================================================
-   8. Magazine Style Home Page (Hero & Collections)
-   ========================================================================== */
-
-/* 8.1 Hero Section Layout */
-.fq-hero {
+/* 8. 強制 Hero Grid 佈局 (2.5fr 1fr) */
+.fq-hero-grid {
     display: grid;
-    grid-template-columns: 72% 28%;
+    grid-template-columns: 2.5fr 1fr;
     gap: 30px;
     margin: 40px 0 60px;
 }
 
-.fq-hero-left {
+.fq-main-post {
     position: relative;
 }
 
 .fq-hero-post-large {
     position: relative;
-    height: 500px;
+    height: 550px;
     overflow: hidden;
     border-radius: 8px;
     background: #000;
@@ -187,7 +154,7 @@
     left: 0;
     width: 100%;
     padding: 40px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
     color: #fff;
     z-index: 2;
 }
@@ -197,21 +164,20 @@
 }
 
 .fq-tag {
-    background: #fff;
-    color: #000;
-    padding: 4px 10px;
+    background: #14467c;
+    color: #fff;
+    padding: 4px 12px;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     border-radius: 2px;
-    margin-right: 8px;
 }
 
 .fq-hero-post-title {
-    font-size: 36px;
-    line-height: 1.2;
+    font-size: 42px;
+    line-height: 1.1;
     font-weight: 800;
-    margin: 0 0 15px;
+    margin: 0 0 20px;
     color: #fff !important;
 }
 
@@ -222,27 +188,22 @@
     opacity: 0.8;
 }
 
-.fq-hero-post-meta span, .fq-hero-post-meta time {
-    margin-right: 15px;
-}
-
-/* 8.2 Hero Right Sidebar */
-.fq-hero-right {
+.fq-sidebar-posts {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 }
 
 .fq-hero-post-small-link {
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 110px 1fr;
     gap: 15px;
     text-decoration: none;
     color: inherit;
 }
 
 .fq-hero-post-small-image-wrapper {
-    height: 75px;
+    height: 80px;
     border-radius: 4px;
     overflow: hidden;
 }
@@ -254,8 +215,8 @@
 }
 
 .fq-hero-post-small-title {
-    font-size: 16px;
-    line-height: 1.4;
+    font-size: 17px;
+    line-height: 1.3;
     font-weight: 700;
     margin: 0 0 8px;
     display: -webkit-box;
@@ -264,7 +225,7 @@
     overflow: hidden;
 }
 
-/* 8.3 Collection Sections */
+/* 9. Collection Sections */
 .fq-collection {
     margin-bottom: 60px;
 }
@@ -279,10 +240,9 @@
 }
 
 .fq-collection-title {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 800;
     margin: 0;
-    text-transform: capitalize;
 }
 
 .fq-collection-view-all {
@@ -290,14 +250,6 @@
     font-weight: 700;
     text-decoration: none;
     color: #000;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.fq-collection-view-all svg {
-    width: 14px;
-    height: 14px;
 }
 
 .fq-collection-grid {
@@ -340,9 +292,9 @@
     margin: 0 0 10px;
 }
 
-/* 8.4 Responsive Adjustments */
+/* 10. 手機版適應 (RWD) */
 @media (max-width: 1024px) {
-    .fq-hero {
+    .fq-hero-grid {
         grid-template-columns: 1fr;
     }
     .fq-collection-grid {
@@ -351,16 +303,22 @@
 }
 
 @media (max-width: 767px) {
+    .gh-head-logo img {
+        height: 32px;
+    }
     .fq-hero-post-large {
         height: 400px;
     }
     .fq-hero-post-title {
-        font-size: 28px;
+        font-size: 30px;
     }
     .fq-hero-post-small-link {
-        grid-template-columns: 80px 1fr;
+        grid-template-columns: 90px 1fr;
     }
     .fq-collection-grid {
         grid-template-columns: 1fr;
+    }
+    .gh-foot {
+        padding: 40px 0 30px;
     }
 }
