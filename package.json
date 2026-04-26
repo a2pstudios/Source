@@ -1,7 +1,7 @@
 {
     "name": "fqpedia-headline",
     "description": "A Ghost theme",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "private": true,
     "engines": {
         "ghost": ">=5.0.0"
@@ -61,13 +61,6 @@
                 "type": "select",
                 "options": ["Modern sans-serif", "Elegant serif"],
                 "default": "Elegant serif"
-            },
-            "white_publication_logo_for_transparent_header": {
-                "type": "image"
-            },
-            "show_publication_cover": {
-                "type": "boolean",
-                "default": true
             },
             "email_signup_text": {
                 "type": "text",
