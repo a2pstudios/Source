@@ -141,3 +141,226 @@
         height: 32px; /* 手機版略微縮小以節省空間 */
     }
 }
+
+/* ==========================================================================
+   8. Magazine Style Home Page (Hero & Collections)
+   ========================================================================== */
+
+/* 8.1 Hero Section Layout */
+.fq-hero {
+    display: grid;
+    grid-template-columns: 72% 28%;
+    gap: 30px;
+    margin: 40px 0 60px;
+}
+
+.fq-hero-left {
+    position: relative;
+}
+
+.fq-hero-post-large {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #000;
+}
+
+.fq-hero-post-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    transition: transform 0.5s ease;
+}
+
+.fq-hero-post-large:hover .fq-hero-post-image {
+    transform: scale(1.05);
+}
+
+.fq-hero-post-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: #fff;
+    z-index: 2;
+}
+
+.fq-hero-post-tags {
+    margin-bottom: 12px;
+}
+
+.fq-tag {
+    background: #fff;
+    color: #000;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 2px;
+    margin-right: 8px;
+}
+
+.fq-hero-post-title {
+    font-size: 36px;
+    line-height: 1.2;
+    font-weight: 800;
+    margin: 0 0 15px;
+    color: #fff !important;
+}
+
+.fq-hero-post-meta {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.fq-hero-post-meta span, .fq-hero-post-meta time {
+    margin-right: 15px;
+}
+
+/* 8.2 Hero Right Sidebar */
+.fq-hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.fq-hero-post-small-link {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 15px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.fq-hero-post-small-image-wrapper {
+    height: 75px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.fq-hero-post-small-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fq-hero-post-small-title {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 700;
+    margin: 0 0 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 8.3 Collection Sections */
+.fq-collection {
+    margin-bottom: 60px;
+}
+
+.fq-collection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid #000;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+}
+
+.fq-collection-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.fq-collection-view-all {
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.fq-collection-view-all svg {
+    width: 14px;
+    height: 14px;
+}
+
+.fq-collection-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.fq-grid-post-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.fq-grid-post-image-wrapper {
+    aspect-ratio: 16/9;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.fq-grid-post-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fq-grid-post-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #14467c;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.fq-grid-post-title {
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 700;
+    margin: 0 0 10px;
+}
+
+/* 8.4 Responsive Adjustments */
+@media (max-width: 1024px) {
+    .fq-hero {
+        grid-template-columns: 1fr;
+    }
+    .fq-collection-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .fq-hero-post-large {
+        height: 400px;
+    }
+    .fq-hero-post-title {
+        font-size: 28px;
+    }
+    .fq-hero-post-small-link {
+        grid-template-columns: 80px 1fr;
+    }
+    .fq-collection-grid {
+        grid-template-columns: 1fr;
+    }
+}

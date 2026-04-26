@@ -3,24 +3,94 @@
 <main class="gh-main gh-outer">
     <div class="gh-inner">
 
-        <section class="gh-pagehead">
-            <h1 class="gh-pagehead-title">{{t "Latest"}}</h1>
+        {{!-- 1. Hero Section --}}
+        <section class="fq-hero">
+            {{#get "posts" include="authors,tags" limit="5" as |hero_posts|}}
+                {{#foreach hero_posts}}
+                    {{#if @first}}
+                        {{!-- Left: Large Featured Card --}}
+                        <div class="fq-hero-left">
+                            <article class="fq-hero-post-large {{post_class}}">
+                                <a class="fq-hero-post-link" href="{{url}}">
+                                    {{#if feature_image}}
+                                        <img class="fq-hero-post-image" src="{{img_url feature_image size="xl"}}" alt="{{title}}">
+                                    {{/if}}
+                                    <div class="fq-hero-post-content">
+                                        <div class="fq-hero-post-tags">
+                                            {{#foreach tags limit="2"}}
+                                                <span class="fq-tag">{{name}}</span>
+                                            {{/foreach}}
+                                        </div>
+                                        <h2 class="fq-hero-post-title">{{title}}</h2>
+                                        <div class="fq-hero-post-meta">
+                                            <span class="fq-author">BY {{authors}}</span>
+                                            <time class="fq-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
+                                        </div>
+                                    </div>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="fq-hero-right">
+                    {{else}}
+                        {{!-- Right: Sidebar List --}}
+                        <article class="fq-hero-post-small">
+                            <a class="fq-hero-post-small-link" href="{{url}}">
+                                {{#if feature_image}}
+                                    <div class="fq-hero-post-small-image-wrapper">
+                                        <img src="{{img_url feature_image size="s"}}" alt="{{title}}">
+                                    </div>
+                                {{/if}}
+                                <div class="fq-hero-post-small-content">
+                                    <h3 class="fq-hero-post-small-title">{{title}}</h3>
+                                    <div class="fq-hero-post-meta">
+                                        <span class="fq-author">BY {{authors}}</span>
+                                        <time class="fq-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    {{/if}}
+                    {{#if @last}}
+                        </div>
+                    {{/if}}
+                {{/foreach}}
+            {{/get}}
         </section>
 
-        <div class="gh-topic gh-topic-grid">
-            <div class="gh-topic-content gh-feed">
-                {{#match pagination.page 2}}
-                    {{#get "posts" include="authors" limit=@config.posts_per_page as |recent|}}
-                        {{#foreach recent}}
-                            {{> "loop-grid"}}
-                        {{/foreach}}
-                    {{/get}}
-                {{/match}}
-                {{#foreach posts}}
-                    {{> "loop-grid" has_large_post=false}}
-                {{/foreach}}
-            </div>
-        </div>
+        {{!-- 2. Collection Sections (Categories) --}}
+        {{#get "tags" limit="4" include="count.posts" order="count.posts desc"}}
+            {{#foreach tags}}
+                <section class="fq-collection">
+                    <header class="fq-collection-header">
+                        <h2 class="fq-collection-title">{{name}}</h2>
+                        <a href="{{url}}" class="fq-collection-view-all">View all {{> "icons/arrow-right"}}</a>
+                    </header>
+                    <div class="fq-collection-grid">
+                        {{#get "posts" filter="tag:{{slug}}" limit="4" include="authors,tags"}}
+                            {{#foreach posts}}
+                                <article class="fq-grid-post">
+                                    <a class="fq-grid-post-link" href="{{url}}">
+                                        {{#if feature_image}}
+                                            <div class="fq-grid-post-image-wrapper">
+                                                <img src="{{img_url feature_image size="m"}}" alt="{{title}}">
+                                            </div>
+                                        {{/if}}
+                                        <div class="fq-grid-post-content">
+                                            <span class="fq-grid-post-tag">{{primary_tag.name}}</span>
+                                            <h3 class="fq-grid-post-title">{{title}}</h3>
+                                            <div class="fq-grid-post-meta">
+                                                <span class="fq-author">BY {{authors}}</span>
+                                                <time class="fq-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            {{/foreach}}
+                        {{/get}}
+                    </div>
+                </section>
+            {{/foreach}}
+        {{/get}}
 
     </div>
 </main>
