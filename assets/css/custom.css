@@ -17,4 +17,83 @@
 .nav-facebook a::before {content: "\f09a"} .nav-instagram a::before {content: "\f16d"}
 .nav-tiktok a::before {content: "\e07b"} .nav-x a::before {content: "\e61b"}
 .nav-youtube a::before {content: "\f167"}
-.gh-foot .gh-copyright { display: none !important; }
+
+/* 1. 全局 Footer 容器優化 */
+.gh-foot, 
+.site-footer-disclaimer {
+    background-color: #14467c !important; 
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.site-footer-disclaimer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 0 60px;
+}
+
+/* 2. 內容容器佈局 */
+.footer-inner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 3. 連結樣式優化 */
+.footer-legal-links {
+    margin-bottom: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.3);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px; /* 使用 CSS gap 控制間距 */
+}
+
+.footer-legal-links a {
+    color: #ffffff !important;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.2s;
+}
+
+.footer-legal-links a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+/* 4. 免責聲明與版權文字 */
+.disclaimer-text {
+    font-size: 12px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.95) !important; 
+    max-width: 850px;
+    margin: 0 auto 20px auto;
+    word-break: break-word;
+}
+
+.footer-copyright {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.8) !important; 
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* 5. 手機版適應 (RWD) */
+@media (max-width: 767px) {
+    .site-footer-disclaimer {
+        padding: 30px 0 50px;
+    }
+    .footer-legal-links {
+        gap: 8px 15px;
+    }
+    .footer-legal-links a {
+        font-size: 13px;
+    }
+    .disclaimer-text {
+        font-size: 11px;
+        text-align: justify;
+    }
+}
