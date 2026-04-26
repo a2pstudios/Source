@@ -1,0 +1,20 @@
+@font-face { font-family: 'Manrope'; font-display: swap !important; }
+
+/* 預留空間防止佈局跳動 (CLS) */
+.tradingview-widget-container { 
+    min-height: 46px; 
+    background: #131722; 
+    width: 100%;
+}
+
+/* 導航欄圖標與版權優化 */
+:where(.nav, .gh-head-menu) :is(.nav-facebook, .nav-instagram, .nav-tiktok, .nav-x, .nav-youtube) a {
+    font-size: 0 !important; display: inline-block;
+}
+:where(.nav, .gh-head-menu) :is(.nav-facebook, .nav-instagram, .nav-tiktok, .nav-x, .nav-youtube) a::before {
+    font-family: "Font Awesome 6 Brands"; font-size: 20px; font-display: swap;
+}
+.nav-facebook a::before {content: "\f09a"} .nav-instagram a::before {content: "\f16d"}
+.nav-tiktok a::before {content: "\e07b"} .nav-x a::before {content: "\e61b"}
+.nav-youtube a::before {content: "\f167"}
+.gh-foot .gh-copyright { display: none !important; }

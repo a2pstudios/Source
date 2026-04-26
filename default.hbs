@@ -6,11 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{meta_title page=(t " (Page %)")}}</title>
     <link rel="stylesheet" href="{{asset "built/screen.css"}}">
+    <link rel="stylesheet" href="{{asset "css/custom.css"}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css" media="print" onload="this.media='all'">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77SJ3C7RN2"></script>
+    <script defer src="{{asset "js/custom.js"}}"></script>
 
     {{ghost_head}}
 </head>
 
 <body class="{{body_class}}{{{block "body_class"}}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}{{#is "tag"}}{{#if tag.feature_image}} is-head-transparent{{/if}}{{/is}}{{#match @custom.header_style "Accent color"}} is-head-brand{{/match}}{{#match @custom.header_style "Dark"}} is-head-dark{{/match}}">
+
+<div class="tradingview-widget-container" id="tv-ticker-wrapper">
+    <div class="tradingview-widget-container__widget"></div>
+</div>
+
 <div class="gh-site">
 
     <header id="gh-head" class="gh-head gh-outer">
