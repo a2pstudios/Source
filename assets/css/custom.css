@@ -322,3 +322,8 @@
         padding: 40px 0 30px;
     }
 }
+
+/* 自動切換 Logo 顏色 */
+.is-head-transparent .gh-head-logo img {
+    filter: invert(1);
+}
