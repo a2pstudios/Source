@@ -8,7 +8,8 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-77SJ3C7RN2');
 
-// TradingView Ticker Tape (Lazy Loaded)
+// TradingView Ticker Tape (Lazy Loaded) - Disabled
+/*
 window.addEventListener('load', function() {
     setTimeout(function() {
         const tvWrapper = document.getElementById('tv-ticker-wrapper');
@@ -38,3 +39,4 @@ window.addEventListener('load', function() {
         }
     }, 1500); // Delay 1.5s for PageSpeed performance
 });
+*/

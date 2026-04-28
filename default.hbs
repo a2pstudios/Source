@@ -17,9 +17,10 @@
 <body class="{{body_class}}{{{block "body_class"}}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}{{#is "tag"}}{{#if tag.feature_image}} is-head-transparent{{/if}}{{/is}}{{#match @custom.header_style "Accent color"}} is-head-brand{{/match}}{{#match @custom.header_style "Dark"}} is-head-dark{{/match}}">
 <!-- FQPEDIA_VER_1.1.0 -->
 
-<div class="tradingview-widget-container" id="tv-ticker-wrapper">
+{{!-- TradingView Ticker Disabled --}}
+{{!-- <div class="tradingview-widget-container" id="tv-ticker-wrapper">
     <div class="tradingview-widget-container__widget"></div>
-</div>
+</div> --}}
 
 <div class="gh-site">
 
