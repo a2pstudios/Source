@@ -2,12 +2,13 @@
 <html lang="{{@site.locale}}">
 
 <head>
+    <link rel="preload" href="https://fonts.bunny.net/css?family=Manrope:400,500,600,700,800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{meta_title page=(t " (Page %)")}}</title>
     <link rel="stylesheet" href="{{asset "built/screen.css"}}">
     <link rel="stylesheet" href="{{asset "css/custom.css"}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css" media="print" onload="this.media=\'all\'">
+    {{!-- Font Awesome removed for PageSpeed optimization --}}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-77SJ3C7RN2"></script>
     <script defer src="{{asset "js/custom.js"}}"></script>
 

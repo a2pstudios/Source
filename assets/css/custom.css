@@ -91,7 +91,7 @@
 .disclaimer-text {
     font-size: 12px;
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.9) !important; 
+    color: rgba(255, 255, 255, 0.95) !important; 
     max-width: 850px;
     margin: 0 auto;
     text-align: center;
@@ -101,7 +101,7 @@
 
 .footer-copyright {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.6) !important; 
+    color: rgba(255, 255, 255, 0.95) !important; 
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
@@ -326,4 +326,13 @@
 /* 自動切換 Logo 顏色 */
 .is-head-transparent .gh-head-logo img {
     filter: invert(1);
+}
+
+/* Font Awesome Brands Lightweight Optimization */
+@font-face {
+    font-family: 'Font Awesome 6 Brands';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('https://cdn.enit.fr/assets/fontawesome/6.5.2/webfonts/fa-brands-400.woff2') format('woff2');
 }
