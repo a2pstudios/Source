@@ -1,9 +1,0 @@
-{{!-- Custom navigation partial with multi-level dropdown support --}}
-{{!-- Dash-prefixed labels (- Item) become sub-items; parsed by JS --}}
-<ul class="nav gh-primary-nav" id="gh-primary-nav">
-{{#foreach navigation}}
-    <li class="nav-item gh-nav-item" data-nav-label="{{label}}" data-nav-url="{{url}}">
-        <a href="{{url}}">{{label}}</a>
-    </li>
-{{/foreach}}
-</ul>
