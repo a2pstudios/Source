@@ -96,9 +96,24 @@
                     {{#if @site.twitter}}
                         <a href="{{twitter_url @site.twitter}}" target="_blank" rel="noopener" aria-label="Twitter">{{> "icons/twitter"}}</a>
                     {{/if}}
-                    <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">{{> "icons/instagram"}}</a>
-                    <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Youtube">{{> "icons/youtube"}}</a>
-                    <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">{{> "icons/tiktok"}}</a>
+                    {{#if @custom.social_instagram_url}}
+                        <a href="{{@custom.social_instagram_url}}" target="_blank" rel="noopener" aria-label="Instagram">{{> "icons/instagram"}}</a>
+                    {{/if}}
+                    {{#if @custom.social_youtube_url}}
+                        <a href="{{@custom.social_youtube_url}}" target="_blank" rel="noopener" aria-label="Youtube">{{> "icons/youtube"}}</a>
+                    {{/if}}
+                    {{#if @custom.social_tiktok_url}}
+                        <a href="{{@custom.social_tiktok_url}}" target="_blank" rel="noopener" aria-label="TikTok">{{> "icons/tiktok"}}</a>
+                    {{/if}}
+                    {{#if @custom.social_linkedin_url}}
+                        <a href="{{@custom.social_linkedin_url}}" target="_blank" rel="noopener" aria-label="LinkedIn">{{> "icons/linkedin"}}</a>
+                    {{/if}}
+                    {{#if @custom.social_bluesky_url}}
+                        <a href="{{@custom.social_bluesky_url}}" target="_blank" rel="noopener" aria-label="Bluesky">{{> "icons/bluesky"}}</a>
+                    {{/if}}
+                    {{#if @custom.social_threads_url}}
+                        <a href="{{@custom.social_threads_url}}" target="_blank" rel="noopener" aria-label="Threads">{{> "icons/threads"}}</a>
+                    {{/if}}
                 </div>
 
                 <nav class="footer-legal-links">
