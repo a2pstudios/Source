@@ -602,3 +602,233 @@
         font-size: 1.7rem;
     }
 }
+
+/* ========================================
+   15. Homepage Hero Layouts (Enova-style)
+   ======================================== */
+
+/* Shared hero text styles */
+.fq-hero-headline {
+    font-size: 44px;
+    line-height: 1.15;
+    font-weight: 800;
+    margin: 0 0 16px;
+    color: var(--color-primary-text, #000);
+}
+
+.fq-hero-subheadline {
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--color-secondary-text, #555);
+    margin: 0 0 28px;
+    max-width: 640px;
+}
+
+/* --- Email Subscription hero --- */
+.fq-hero-email {
+    text-align: center;
+    padding: 80px 24px;
+    margin: 20px 0 60px;
+    background: var(--color-lighter-gray, #f7f7f9);
+    border-radius: 12px;
+}
+
+.fq-hero-email-content {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.fq-hero-email .fq-hero-subheadline {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fq-hero-subscribe-btn {
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* --- Call to Action hero --- */
+.fq-hero-cta {
+    text-align: center;
+    padding: 90px 24px;
+    margin: 20px 0 60px;
+    background: #14467c;
+    border-radius: 12px;
+    color: #fff;
+}
+
+.fq-hero-cta .fq-hero-headline,
+.fq-hero-cta .fq-hero-subheadline {
+    color: #fff;
+}
+
+.fq-hero-cta .fq-hero-subheadline {
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.85;
+}
+
+.fq-hero-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.fq-hero-btn-primary,
+.fq-hero-btn-secondary {
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.fq-hero-btn-primary {
+    background: #fff;
+    color: #14467c;
+    border: none;
+}
+
+.fq-hero-btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* --- Personal Bio hero --- */
+.fq-hero-bio {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 50px 0;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--color-border, #eee);
+}
+
+.fq-hero-bio-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.fq-hero-bio-name {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0 0 12px;
+}
+
+.fq-hero-bio-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-secondary-text, #555);
+    margin: 0 0 16px;
+    max-width: 600px;
+}
+
+.fq-hero-bio-link {
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #14467c;
+}
+
+/* ========================================
+   16. Tag-based Home Feed Tabs
+   ======================================== */
+.fq-feed-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.fq-feed-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.fq-feed-tab {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 8px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--color-secondary-text, #666);
+    background: var(--color-lighter-gray, #f2f2f5);
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.fq-feed-tab:hover {
+    background: var(--color-light-gray, #e6e6ea);
+}
+
+.fq-feed-tab.is-active {
+    background: #14467c;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .fq-hero-headline { font-size: 30px; }
+    .fq-hero-subheadline { font-size: 15px; }
+    .fq-hero-email { padding: 50px 20px; }
+    .fq-hero-cta { padding: 60px 20px; }
+    .fq-hero-bio {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 30px 0;
+    }
+    .fq-hero-bio-text { margin-left: auto; margin-right: auto; }
+    .fq-feed-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .fq-feed-tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        width: 100%;
+        padding-bottom: 4px;
+    }
+    .fq-feed-tab { white-space: nowrap; }
+}
+
+/* Dark mode support for hero variants + tabs */
+[data-theme="dark"] .fq-hero-email {
+    background: var(--color-lighter-gray);
+}
+
+[data-theme="dark"] .fq-hero-bio {
+    border-bottom-color: var(--color-border);
+}
+
+[data-theme="dark"] .fq-hero-bio-link {
+    color: var(--ghost-accent-color, #5b9bd5);
+}
+
+[data-theme="dark"] .fq-feed-tab {
+    background: var(--color-lighter-gray);
+    color: var(--color-secondary-text);
+}
+
+[data-theme="dark"] .fq-feed-tab:hover {
+    background: var(--color-light-gray);
+}
+
+[data-theme="dark"] .fq-feed-tab.is-active {
+    background: var(--ghost-accent-color, #14467c);
+}
