@@ -20,7 +20,7 @@ window.addEventListener('load', function() {
             script.async = true;
             script.innerHTML = JSON.stringify({
                 "symbols": [
-                    { "proName": "INDEX:HSI", "title": "恒生指數" },
+                    { "proName": "INDEX:HSI", "title": "恆生指數" },
                     { "proName": "FOREXCOM:SPXUSD", "title": "標普 500 指數" },
                     { "proName": "FOREXCOM:NSXUSD", "title": "納斯達克 100" },
                     { "proName": "FOREXCOM:DJI", "title": "道瓊斯工業指數" },
@@ -37,6 +37,204 @@ window.addEventListener('load', function() {
             });
             tvWrapper.appendChild(script);
         }
-    }, 1500); // Delay 1.5s for PageSpeed performance
+    }, 1500);
 });
 */
+
+/* ========================================
+   Multi-level Dropdown Navigation (Enova-style)
+   ======================================== */
+(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        var navList = document.getElementById('gh-primary-nav');
+        if (!navList) return;
+
+        var items = Array.prototype.slice.call(navList.querySelectorAll(':scope > .nav-item'));
+        var topLevelItem = null;
+
+        items.forEach(function (item) {
+            var label = item.getAttribute('data-nav-label') || '';
+            var url = item.getAttribute('data-nav-url') || '';
+            var link = item.querySelector('a');
+
+            if (label.charAt(0) === '-') {
+                var cleanLabel = label.replace(/^-\s*/, '');
+
+                if (topLevelItem && !topLevelItem.classList.contains('has-dropdown')) {
+                    topLevelItem.classList.add('has-dropdown');
+                    var dropdown = document.createElement('ul');
+                    dropdown.className = 'gh-nav-dropdown';
+                    topLevelItem.appendChild(dropdown);
+                }
+
+                if (topLevelItem) {
+                    var dropdownList = topLevelItem.querySelector('.gh-nav-dropdown');
+                    var subLi = document.createElement('li');
+                    var subLink = document.createElement('a');
+                    subLink.href = url;
+                    subLink.textContent = cleanLabel;
+
+                    if (url && !url.startsWith('/') && !url.startsWith(window.location.origin)) {
+                        subLink.setAttribute('data-external', 'true');
+                        subLink.target = '_blank';
+                        subLink.rel = 'noopener';
+                    }
+
+                    subLi.appendChild(subLink);
+                    dropdownList.appendChild(subLi);
+                    item.remove();
+                }
+            } else {
+                topLevelItem = item;
+
+                if (link && url && !url.startsWith('/') && !url.startsWith(window.location.origin)) {
+                    link.setAttribute('data-external', 'true');
+                    link.target = '_blank';
+                    link.rel = 'noopener';
+                }
+            }
+        });
+
+        var dropdownParents = navList.querySelectorAll('.gh-nav-item.has-dropdown');
+        dropdownParents.forEach(function (parent) {
+            var parentLink = parent.querySelector(':scope > a');
+            if (parentLink) {
+                parentLink.addEventListener('click', function (e) {
+                    if (window.innerWidth <= 767) {
+                        e.preventDefault();
+                        parent.classList.toggle('expanded');
+                    }
+                });
+            }
+        });
+    });
+})();
+
+/* ========================================
+   Footer Secondary Navigation with Grouped Columns
+   ======================================== */
+(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        var footerNav = document.getElementById('gh-footer-nav');
+        if (!footerNav) return;
+
+        var items = Array.prototype.slice.call(footerNav.querySelectorAll('.footer-nav-item'));
+        if (items.length === 0) return;
+
+        var hasColumns = false;
+        var columns = [];
+        var currentColumn = null;
+
+        items.forEach(function (item) {
+            var label = item.getAttribute('data-nav-label') || '';
+            var url = item.getAttribute('data-nav-url') || '';
+            var link = item.querySelector('a');
+
+            if (label.charAt(0) === '#') {
+                hasColumns = true;
+                var cleanTitle = label.replace(/^#\s*/, '');
+                currentColumn = { title: cleanTitle, links: [] };
+                columns.push(currentColumn);
+            } else {
+                var linkData = { label: label, url: url };
+
+                if (url && !url.startsWith('/') && !url.startsWith(window.location.origin)) {
+                    linkData.external = true;
+                    if (link) {
+                        link.setAttribute('data-external', 'true');
+                        link.target = '_blank';
+                        link.rel = 'noopener';
+                    }
+                }
+
+                if (currentColumn) {
+                    currentColumn.links.push(linkData);
+                } else {
+                    currentColumn = { title: null, links: [] };
+                    columns.push(currentColumn);
+                    currentColumn.links.push(linkData);
+                }
+            }
+        });
+
+        footerNav.innerHTML = '';
+        footerNav.classList.add('footer-nav-processed');
+
+        if (hasColumns) {
+            footerNav.setAttribute('data-layout', 'columns');
+            columns.forEach(function (col) {
+                var colDiv = document.createElement('div');
+                colDiv.className = 'footer-nav-column';
+                if (col.title) {
+                    var titleEl = document.createElement('div');
+                    titleEl.className = 'footer-nav-column-title';
+                    titleEl.textContent = col.title;
+                    colDiv.appendChild(titleEl);
+                }
+                col.links.forEach(function (linkData) {
+                    var a = document.createElement('a');
+                    a.href = linkData.url;
+                    a.textContent = linkData.label;
+                    if (linkData.external) {
+                        a.setAttribute('data-external', 'true');
+                        a.target = '_blank';
+                        a.rel = 'noopener';
+                    }
+                    colDiv.appendChild(a);
+                });
+                if (col.title || col.links.length > 0) footerNav.appendChild(colDiv);
+            });
+        } else {
+            footerNav.setAttribute('data-layout', 'single');
+            columns.forEach(function (col) {
+                col.links.forEach(function (linkData) {
+                    var a = document.createElement('a');
+                    a.href = linkData.url;
+                    a.textContent = linkData.label;
+                    if (linkData.external) {
+                        a.setAttribute('data-external', 'true');
+                        a.target = '_blank';
+                        a.rel = 'noopener';
+                    }
+                    footerNav.appendChild(a);
+                });
+            });
+        }
+    });
+})();
+
+/* ========================================
+   Dark Mode Toggle
+   ======================================== */
+(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        var toggles = document.querySelectorAll('.gh-theme-toggle');
+        if (toggles.length === 0) return;
+
+        function getCurrentTheme() {
+            return document.documentElement.getAttribute('data-theme') || 'light';
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            try { localStorage.setItem('fq-color-scheme', theme); } catch(e) {}
+        }
+
+        toggles.forEach(function (toggle) {
+            toggle.addEventListener('click', function () {
+                var current = getCurrentTheme();
+                applyTheme(current === 'dark' ? 'light' : 'dark');
+            });
+        });
+
+        // Listen to system preference changes (only if no stored preference)
+        try {
+            if (!localStorage.getItem('fq-color-scheme') && window.matchMedia) {
+                var mq = window.matchMedia('(prefers-color-scheme: dark)');
+                mq.addEventListener('change', function (e) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                });
+            }
+        } catch(e) {}
+    });
+})();
