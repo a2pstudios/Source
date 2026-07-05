@@ -31,7 +31,7 @@
                     {{/if}}
                     <div class="fq-hero-cta-buttons">
                         <button class="fq-hero-btn-primary gh-btn gh-primary-btn" data-portal="signup">
-                            {{#if @custom.hero_primary_button_text}}{{@custom.hero_primary_button_text}}{{else}}{{t "Subscribe"}}{{/if}}
+                            {{t "Subscribe"}}
                         </button>
                         {{#if @custom.hero_secondary_button_text}}
                             <a class="fq-hero-btn-secondary gh-btn" href="{{#if @custom.hero_secondary_button_link}}{{@custom.hero_secondary_button_link}}{{else}}{{@site.url}}{{/if}}">
@@ -118,7 +118,7 @@
 
         {{!-- ========================================
              TAG-BASED FEED TABS + LATEST POSTS
-             @custom.home_feed_tags: comma-separated tag slugs shown as tabs
+             @custom.enter_tag_slugs_for_primary_sections: comma-separated tag slugs shown as tabs (reused from primary sections setting)
              ======================================== --}}
         <section class="gh-topic gh-topic-grid">
             <div class="fq-feed-header">
@@ -129,10 +129,10 @@
                         {{t "Latest"}}
                     {{/match}}
                 </h2>
-                {{#if @custom.home_feed_tags}}
+                {{#if @custom.enter_tag_slugs_for_primary_sections}}
                     <nav class="fq-feed-tabs">
                         <a href="{{@site.url}}" class="fq-feed-tab is-active">{{t "Latest"}}</a>
-                        {{#get "tags" filter="slug:[{{@custom.home_feed_tags}}]" limit="10" as |feed_tags|}}
+                        {{#get "tags" filter="slug:[{{@custom.enter_tag_slugs_for_primary_sections}}]" limit="10" as |feed_tags|}}
                             {{#foreach feed_tags}}
                                 <a href="{{url}}" class="fq-feed-tab">{{name}}</a>
                             {{/foreach}}
