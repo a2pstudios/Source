@@ -4,121 +4,8 @@
     <div class="gh-inner">
 
         {{!-- ========================================
-             HERO SECTION - controlled by @custom.hero_layout
-             Options: Featured Posts (default) / Email Subscription / Call to Action / Personal Bio
-             ======================================== --}}
-        {{#match @custom.hero_layout "Email Subscription"}}
-            <section class="fq-hero fq-hero-email">
-                <div class="fq-hero-email-content">
-                    {{#if @custom.hero_headline}}
-                        <h1 class="fq-hero-headline">{{@custom.hero_headline}}</h1>
-                    {{/if}}
-                    {{#if @custom.hero_subheadline}}
-                        <p class="fq-hero-subheadline">{{@custom.hero_subheadline}}</p>
-                    {{/if}}
-                    <button class="fq-hero-subscribe-btn gh-btn gh-primary-btn" data-portal="signup">{{t "Subscribe now"}}</button>
-                </div>
-            </section>
-
-        {{else match @custom.hero_layout "Call to Action"}}
-            <section class="fq-hero fq-hero-cta">
-                <div class="fq-hero-cta-content">
-                    {{#if @custom.hero_headline}}
-                        <h1 class="fq-hero-headline">{{@custom.hero_headline}}</h1>
-                    {{/if}}
-                    {{#if @custom.hero_subheadline}}
-                        <p class="fq-hero-subheadline">{{@custom.hero_subheadline}}</p>
-                    {{/if}}
-                    <div class="fq-hero-cta-buttons">
-                        <button class="fq-hero-btn-primary gh-btn gh-primary-btn" data-portal="signup">
-                            {{t "Subscribe"}}
-                        </button>
-                        {{#if @custom.hero_secondary_button_text}}
-                            <a class="fq-hero-btn-secondary gh-btn" href="{{#if @custom.hero_secondary_button_link}}{{@custom.hero_secondary_button_link}}{{else}}{{@site.url}}{{/if}}">
-                                {{@custom.hero_secondary_button_text}}
-                            </a>
-                        {{/if}}
-                    </div>
-                </div>
-            </section>
-
-        {{else match @custom.hero_layout "Personal Bio"}}
-            {{#if @custom.hero_author_slug}}
-                {{#get "authors" filter="slug:{{@custom.hero_author_slug}}" limit="1" as |bio_authors|}}
-                    {{#foreach bio_authors}}
-                        <section class="fq-hero fq-hero-bio">
-                            {{#if profile_image}}
-                                <img class="fq-hero-bio-image" src="{{profile_image}}" alt="{{name}}">
-                            {{/if}}
-                            <div class="fq-hero-bio-content">
-                                <h1 class="fq-hero-bio-name">{{name}}</h1>
-                                {{#if bio}}
-                                    <p class="fq-hero-bio-text">{{bio}}</p>
-                                {{/if}}
-                                <a class="fq-hero-bio-link" href="{{url}}">{{t "View all posts"}} &rarr;</a>
-                            </div>
-                        </section>
-                    {{/foreach}}
-                {{/get}}
-            {{/if}}
-
-        {{else}}
-            {{!-- Featured Posts (default) --}}
-            <section class="fq-hero fq-hero-grid">
-                {{#get "posts" include="authors,tags" limit="4" as |hero_posts|}}
-                    {{#foreach hero_posts}}
-                        {{#if @first}}
-                            <div class="fq-main-post">
-                                <article class="fq-hero-post-large">
-                                    <a class="fq-hero-post-link" href="{{url}}">
-                                        {{#if feature_image}}
-                                            <img class="fq-hero-post-image" src="{{img_url feature_image size="xl"}}" alt="{{title}}" fetchpriority="high" loading="eager">
-                                        {{/if}}
-                                        <div class="fq-hero-post-content">
-                                            <div class="fq-hero-post-tags">
-                                                {{#if primary_tag}}
-                                                    <span class="fq-tag">{{primary_tag.name}}</span>
-                                                {{/if}}
-                                            </div>
-                                            <h2 class="fq-hero-post-title">{{title}}</h2>
-                                            <div class="fq-hero-post-meta">
-                                                <span class="fq-author">BY {{authors}}</span>
-                                                <time class="fq-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </article>
-                            </div>
-                            <div class="fq-sidebar-posts">
-                        {{else}}
-                            <article class="fq-hero-post-small">
-                                <a class="fq-hero-post-small-link" href="{{url}}">
-                                    {{#if feature_image}}
-                                        <div class="fq-hero-post-small-image-wrapper">
-                                            <img src="{{img_url feature_image size="s"}}" alt="{{title}}">
-                                        </div>
-                                    {{/if}}
-                                    <div class="fq-hero-post-small-content">
-                                        <h3 class="fq-hero-post-small-title">{{title}}</h3>
-                                        <div class="fq-hero-post-meta">
-                                            <span class="fq-author">BY {{authors}}</span>
-                                            <time class="fq-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
-                                        </div>
-                                    </div>
-                                </a>
-                            </article>
-                        {{/if}}
-                        {{#if @last}}
-                            </div>
-                        {{/if}}
-                    {{/foreach}}
-                {{/get}}
-            </section>
-        {{/match}}
-
-        {{!-- ========================================
              TAG-BASED FEED TABS + LATEST POSTS
-             @custom.enter_tag_slugs_for_primary_sections: comma-separated tag slugs shown as tabs (reused from primary sections setting)
+             @custom.enter_tag_slugs_for_primary_sections: comma-separated tag slugs shown as tabs
              ======================================== --}}
         <section class="gh-topic gh-topic-grid">
             <div class="fq-feed-header">
@@ -175,7 +62,7 @@
         {{/if}}
 
         {{#if @custom.enter_tag_slugs_for_secondary_sections}}
-            {{#get "tags" filter="slug:[{{@custom.enter_tag_slugs_for_secondary_sections}}]"}}
+            {{#get "tags" filter="slug:[{{@custom.enter_tag_slugs_for_primary_sections}}]"}}
                 {{#if tags}}
                     <div class="gh-topic-list">
                         {{#foreach tags}}
@@ -197,5 +84,6 @@
                 {{/get}}
             {{/match}}
         {{/if}}
+
     </div>
 </main>

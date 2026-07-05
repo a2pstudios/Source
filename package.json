@@ -1,7 +1,7 @@
 {
     "name": "fqpedia-headline",
     "description": "A Ghost theme",
-    "version": "1.3.3",
+    "version": "1.4.0",
     "private": true,
     "engines": {
         "ghost": ">=5.0.0"
@@ -21,33 +21,59 @@
     "config": {
         "posts_per_page": 7,
         "image_sizes": {
-            "xs": { "width": 150 },
-            "s": { "width": 300 },
-            "m": { "width": 720 },
-            "l": { "width": 960 },
-            "xl": { "width": 1200 },
-            "xxl": { "width": 2000 }
+            "xs": {
+                "width": 150
+            },
+            "s": {
+                "width": 300
+            },
+            "m": {
+                "width": 720
+            },
+            "l": {
+                "width": 960
+            },
+            "xl": {
+                "width": 1200
+            },
+            "xxl": {
+                "width": 2000
+            }
         },
         "card_assets": true,
         "custom": {
             "navigation_layout": {
                 "type": "select",
-                "options": ["Logo on the left", "Logo in the middle", "Stacked"],
+                "options": [
+                    "Logo on the left",
+                    "Logo in the middle",
+                    "Stacked"
+                ],
                 "default": "Stacked"
             },
             "header_style": {
                 "type": "select",
-                "options": ["Light", "Accent color", "Dark"],
+                "options": [
+                    "Light",
+                    "Accent color",
+                    "Dark"
+                ],
                 "default": "Light"
             },
             "title_font": {
                 "type": "select",
-                "options": ["Modern sans-serif", "Elegant serif"],
+                "options": [
+                    "Modern sans-serif",
+                    "Elegant serif"
+                ],
                 "default": "Modern sans-serif"
             },
             "body_font": {
                 "type": "select",
-                "options": ["Modern sans-serif", "Elegant serif"],
+                "options": [
+                    "Modern sans-serif",
+                    "Elegant serif"
+                ],
                 "default": "Elegant serif"
             },
             "email_signup_text": {
@@ -56,7 +82,11 @@
             },
             "color_scheme": {
                 "type": "select",
-                "options": ["System", "Light", "Dark"],
+                "options": [
+                    "System",
+                    "Light",
+                    "Dark"
+                ],
                 "default": "System",
                 "description": "System follows the visitor's device setting and shows a toggle button"
             },
@@ -66,7 +96,10 @@
             },
             "post_feed_layout": {
                 "type": "select",
-                "options": ["Grid", "List"],
+                "options": [
+                    "Grid",
+                    "List"
+                ],
                 "default": "Grid"
             },
             "social_instagram_url": {
@@ -87,7 +120,12 @@
             },
             "hero_layout": {
                 "type": "select",
-                "options": ["Featured Posts", "Email Subscription", "Call to Action", "Personal Bio"],
+                "options": [
+                    "Featured Posts",
+                    "Email Subscription",
+                    "Call to Action",
+                    "Personal Bio"
+                ],
                 "default": "Featured Posts",
                 "group": "homepage",
                 "description": "Choose what appears at the top of the homepage"
@@ -148,5 +186,6 @@
         "postcss": "8.5.10",
         "postcss-easy-import": "4.0.0",
         "pump": "3.0.4"
-    }
+    },
+    "custom": []
 }
