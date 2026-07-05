@@ -63,12 +63,38 @@
             {{/if}}
 
         {{else}}
-            {{!-- Featured Posts (default) --}}
+            {{!-- Featured Posts — 3-column newspaper layout --}}
             <section class="fq-hero fq-hero-grid">
-                {{#get "posts" include="authors,tags" limit="4" as |hero_posts|}}
-                    {{#foreach hero_posts}}
-                        {{#if @first}}
-                            <div class="fq-main-post">
+                {{!-- Left column: secondary stories --}}
+                <div class="fq-sidebar-posts">
+                    {{#get "posts" include="authors,tags" limit="2" as |sidebar_posts|}}
+                        {{#foreach sidebar_posts}}
+                            <article class="fq-hero-post-small">
+                                <a class="fq-hero-post-small-link" href="{{url}}">
+                                    {{#if feature_image}}
+                                        <div class="fq-hero-post-small-image-wrapper">
+                                            <img src="{{img_url feature_image size="m"}}" alt="{{title}}" loading="lazy">
+                                        </div>
+                                    {{/if}}
+                                    {{#if primary_tag}}
+                                        <span class="fq-hero-post-small-tag">{{primary_tag.name}}</span>
+                                    {{/if}}
+                                    <h3 class="fq-hero-post-small-title">{{title}}</h3>
+                                    <div class="fq-hero-post-meta">
+                                        <span class="fq-author">BY {{authors}}</span>
+                                        <time class="fq-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD"}}</time>
+                                    </div>
+                                </a>
+                            </article>
+                        {{/foreach}}
+                    {{/get}}
+                </div>
+
+                {{!-- Center column: main featured story --}}
+                <div class="fq-main-post">
+                    {{#get "posts" include="authors,tags" limit="1" filter="featured:true" as |featured_post|}}
+                        {{#if featured_post.[0]}}
+                            {{#foreach featured_post}}
                                 <article class="fq-hero-post-large">
                                     <a class="fq-hero-post-link" href="{{url}}">
                                         {{#if feature_image}}
@@ -81,6 +107,9 @@
                                                 {{/if}}
                                             </div>
                                             <h2 class="fq-hero-post-title">{{title}}</h2>
+                                            {{#if excerpt}}
+                                                <p class="fq-hero-post-excerpt">{{excerpt words="30"}}</p>
+                                            {{/if}}
                                             <div class="fq-hero-post-meta">
                                                 <span class="fq-author">BY {{authors}}</span>
                                                 <time class="fq-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
@@ -88,33 +117,65 @@
                                         </div>
                                     </a>
                                 </article>
-                            </div>
-                            <div class="fq-sidebar-posts">
+                            {{/foreach}}
                         {{else}}
-                            <article class="fq-hero-post-small">
-                                <a class="fq-hero-post-small-link" href="{{url}}">
-                                    {{#if feature_image}}
-                                        <div class="fq-hero-post-small-image-wrapper">
-                                            <img src="{{img_url feature_image size="s"}}" alt="{{title}}">
-                                        </div>
+                            {{!-- Fallback: first post if no featured --}}
+                            {{#get "posts" include="authors,tags" limit="1" as |fallback_post|}}
+                                {{#foreach fallback_post}}
+                                    <article class="fq-hero-post-large">
+                                        <a class="fq-hero-post-link" href="{{url}}">
+                                            {{#if feature_image}}
+                                                <img class="fq-hero-post-image" src="{{img_url feature_image size="xl"}}" alt="{{title}}" fetchpriority="high" loading="eager">
+                                            {{/if}}
+                                            <div class="fq-hero-post-content">
+                                                <div class="fq-hero-post-tags">
+                                                    {{#if primary_tag}}
+                                                        <span class="fq-tag">{{primary_tag.name}}</span>
+                                                    {{/if}}
+                                                </div>
+                                                <h2 class="fq-hero-post-title">{{title}}</h2>
+                                                {{#if excerpt}}
+                                                    <p class="fq-hero-post-excerpt">{{excerpt words="30"}}</p>
+                                                {{/if}}
+                                                <div class="fq-hero-post-meta">
+                                                    <span class="fq-author">BY {{authors}}</span>
+                                                    <time class="fq-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </article>
+                                {{/foreach}}
+                            {{/get}}
+                        {{/if}}
+                    {{/get}}
+                </div>
+
+                {{!-- Right column: More to Read numbered list --}}
+                <div class="fq-more-to-read">
+                    <h4 class="fq-more-to-read-header">更多文章</h4>
+                    {{#get "posts" include="tags" limit="4" as |more_posts|}}
+                        {{#foreach more_posts}}
+                            <a class="fq-more-to-read-item" href="{{url}}">
+                                <span class="fq-more-to-read-num"></span>
+                                <div>
+                                    {{#if primary_tag}}
+                                        <span class="fq-more-to-read-tag">{{primary_tag.name}}</span>
                                     {{/if}}
-                                    <div class="fq-hero-post-small-content">
-                                        <h3 class="fq-hero-post-small-title">{{title}}</h3>
-                                        <div class="fq-hero-post-meta">
-                                            <span class="fq-author">BY {{authors}}</span>
-                                            <time class="fq-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
-                                        </div>
-                                    </div>
-                                </a>
-                            </article>
-                        {{/if}}
-                        {{#if @last}}
-                            </div>
-                        {{/if}}
-                    {{/foreach}}
-                {{/get}}
+                                    <p class="fq-more-to-read-title">{{title}}</p>
+                                </div>
+                            </a>
+                        {{/foreach}}
+                    {{/get}}
+                </div>
             </section>
         {{/match}}
+
+        {{!-- Subscribe CTA box --}}
+        <div class="fq-subscribe-box">
+            <h3>掌握每日財經脈動</h3>
+            <p>訂閱 FQpedia 電子報，獲得最新投資分析與市場洞察</p>
+            <button class="gh-btn gh-primary-btn" data-portal="signup">立即訂閱</button>
+        </div>
 
         {{!-- ========================================
              TAG-BASED FEED TABS + LATEST POSTS

@@ -9,6 +9,20 @@ gtag('js', new Date());
 gtag('config', 'G-77SJ3C7RN2');
 
 /* ========================================
+   Breaking News Ticker - seamless scroll
+   ======================================== */
+(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        var track = document.getElementById('fq-ticker-track');
+        if (!track) return;
+        // Duplicate content for seamless infinite scroll
+        var clone = track.cloneNode(true);
+        clone.removeAttribute('id');
+        track.appendChild.apply(track, Array.prototype.slice.call(clone.childNodes));
+    });
+})();
+
+/* ========================================
    Multi-level Dropdown Navigation (Enova-style)
    Parses Ghost native {{navigation}} output.
    Dash-prefixed labels (- Item) become dropdown sub-items.
