@@ -40,7 +40,7 @@
             </div>
 
             <nav class="gh-head-menu">
-                {{navigation}}
+                {{> "navigation"}}
                 {{#unless @site.members_enabled}}
                     {{#match @custom.navigation_layout "Stacked"}}
                         <button class="gh-search gh-icon-btn" aria-label="{{t "Search this site"}}" data-ghost-search>{{> "icons/search"}}</button>
@@ -116,6 +116,18 @@
                     {{/if}}
                 </div>
 
+                {{!-- Secondary navigation with grouped column support --}}
+                {{!-- Hash-prefixed labels (# Group) become column headers; parsed by JS --}}
+                <nav class="footer-secondary-nav" id="gh-footer-nav">
+                {{#foreach @site.secondary_navigation}}
+                    <span class="footer-nav-item" data-nav-label="{{label}}" data-nav-url="{{url}}">
+                        <a href="{{url}}">{{label}}</a>
+                    </span>
+                {{/foreach}}
+                </nav>
+
+                {{!-- Fallback: show hardcoded links if no secondary navigation is configured --}}
+                {{#unless @site.secondary_navigation}}
                 <nav class="footer-legal-links">
                     <a href="https://fqpedia.com/about/">關於FQpedia</a>
                     <a href="https://fqpedia.com/#/portal/">註冊會員</a>
@@ -123,6 +135,7 @@
                     <a href="/privacy/">私隱政策</a>
                     <a href="/contact/">聯絡我們</a>
                 </nav>
+                {{/unless}}
 
                 <div class="footer-disclaimer">
                     <p class="disclaimer-text">
