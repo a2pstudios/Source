@@ -183,16 +183,7 @@
 .fq-sidebar-posts {
     display: flex;
     flex-direction: column;
-    gap: 0;
-    height: 100%;
-}
-
-.fq-hero-post-small {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    padding: 16px 0;
-    border-bottom: 1px solid #e8e8e8;
+    gap: 16px;
 }
 
 .fq-hero-post-small:first-child {
@@ -280,7 +271,6 @@
     .fq-hero-post-large { height: 400px; }
     .fq-hero-post-title { font-size: 30px; }
     .fq-hero-post-small-link { grid-template-columns: 100px 1fr; }
-    .fq-hero-post-small { padding: 12px 0; }
     .fq-collection-grid { grid-template-columns: 1fr; }
     .gh-foot { padding: 40px 0 30px; }
 }
