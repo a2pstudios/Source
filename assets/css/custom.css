@@ -116,7 +116,7 @@
 /* 8. 強制 Hero Grid 佈局 (2.5fr 1fr) */
 .fq-hero-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: 30px;
     margin: 40px 0 60px;
 }
