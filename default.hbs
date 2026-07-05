@@ -140,11 +140,13 @@
 
                 {{!-- Secondary navigation with grouped column support --}}
                 <nav class="footer-secondary-nav" id="gh-footer-nav">
+                <ul class="footer-nav-list">
                 {{#foreach @site.secondary_navigation}}
-                    <span class="footer-nav-item" data-nav-label="{{label}}" data-nav-url="{{url}}">
+                    <li class="footer-nav-item" data-nav-label="{{label}}" data-nav-url="{{url}}">
                         <a href="{{url}}">{{label}}</a>
-                    </span>
+                    </li>
                 {{/foreach}}
+                </ul>
                 </nav>
 
                 {{!-- Fallback: show hardcoded links if no secondary navigation is configured --}}
