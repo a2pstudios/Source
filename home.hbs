@@ -4,27 +4,41 @@
     <div class="gh-inner">
 
         {{!-- ========================================
-             EDITORIAL FEATURED HERO (3-column)
-             Left: 2 posts with thumbnails | Center: large hero | Right: 5 text-only
+             HERO SECTION - controlled by @custom.hero_layout
+             Options: Featured Posts (default) / Email Subscription / Call to Action / Personal Bio
              ======================================== --}}
         {{#match @custom.hero_layout "Email Subscription"}}
-            <section class="fq-subscribe-cta" style="margin-top: 32px;">
-                {{#if @custom.hero_headline}}<h3>{{@custom.hero_headline}}</h3>{{/if}}
-                {{#if @custom.hero_subheadline}}<p>{{@custom.hero_subheadline}}</p>{{/if}}
-                <button class="fq-subscribe-btn" data-portal="signup">{{t "Subscribe now"}}</button>
+            <section class="fq-hero fq-hero-email">
+                <div class="fq-hero-email-content">
+                    {{#if @custom.hero_headline}}
+                        <h1 class="fq-hero-headline">{{@custom.hero_headline}}</h1>
+                    {{/if}}
+                    {{#if @custom.hero_subheadline}}
+                        <p class="fq-hero-subheadline">{{@custom.hero_subheadline}}</p>
+                    {{/if}}
+                    <button class="fq-hero-subscribe-btn gh-btn gh-primary-btn" data-portal="signup">{{t "Subscribe now"}}</button>
+                </div>
             </section>
 
         {{else match @custom.hero_layout "Call to Action"}}
-            <section class="fq-subscribe-cta" style="margin-top: 32px;">
-                {{#if @custom.hero_headline}}<h3>{{@custom.hero_headline}}</h3>{{/if}}
-                {{#if @custom.hero_subheadline}}<p>{{@custom.hero_subheadline}}</p>{{/if}}
-                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-                    <button class="fq-subscribe-btn" data-portal="signup">{{t "Subscribe"}}</button>
-                    {{#if @custom.hero_secondary_button_text}}
-                        <a class="fq-subscribe-btn" style="background:var(--fq-text);" href="{{#if @custom.hero_secondary_button_link}}{{@custom.hero_secondary_button_link}}{{else}}{{@site.url}}{{/if}}">
-                            {{@custom.hero_secondary_button_text}}
-                        </a>
+            <section class="fq-hero fq-hero-cta">
+                <div class="fq-hero-cta-content">
+                    {{#if @custom.hero_headline}}
+                        <h1 class="fq-hero-headline">{{@custom.hero_headline}}</h1>
                     {{/if}}
+                    {{#if @custom.hero_subheadline}}
+                        <p class="fq-hero-subheadline">{{@custom.hero_subheadline}}</p>
+                    {{/if}}
+                    <div class="fq-hero-cta-buttons">
+                        <button class="fq-hero-btn-primary gh-btn gh-primary-btn" data-portal="signup">
+                            {{t "Subscribe"}}
+                        </button>
+                        {{#if @custom.hero_secondary_button_text}}
+                            <a class="fq-hero-btn-secondary gh-btn" href="{{#if @custom.hero_secondary_button_link}}{{@custom.hero_secondary_button_link}}{{else}}{{@site.url}}{{/if}}">
+                                {{@custom.hero_secondary_button_text}}
+                            </a>
+                        {{/if}}
+                    </div>
                 </div>
             </section>
 
@@ -32,14 +46,16 @@
             {{#if @custom.hero_author_slug}}
                 {{#get "authors" filter="slug:{{@custom.hero_author_slug}}" limit="1" as |bio_authors|}}
                     {{#foreach bio_authors}}
-                        <section class="fq-subscribe-cta" style="margin-top:32px;display:flex;align-items:center;gap:24px;text-align:left;">
+                        <section class="fq-hero fq-hero-bio">
                             {{#if profile_image}}
-                                <img src="{{profile_image}}" alt="{{name}}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+                                <img class="fq-hero-bio-image" src="{{profile_image}}" alt="{{name}}">
                             {{/if}}
-                            <div>
-                                <h3>{{name}}</h3>
-                                {{#if bio}}<p>{{bio}}</p>{{/if}}
-                                <a href="{{url}}" style="color:var(--fq-accent);font-weight:600;font-size:14px;">{{t "View all posts"}} &rarr;</a>
+                            <div class="fq-hero-bio-content">
+                                <h1 class="fq-hero-bio-name">{{name}}</h1>
+                                {{#if bio}}
+                                    <p class="fq-hero-bio-text">{{bio}}</p>
+                                {{/if}}
+                                <a class="fq-hero-bio-link" href="{{url}}">{{t "View all posts"}} &rarr;</a>
                             </div>
                         </section>
                     {{/foreach}}
@@ -47,83 +63,66 @@
             {{/if}}
 
         {{else}}
-            {{!-- Featured Posts (default) - Editorial 3-column --}}
-            {{#get "posts" include="authors,tags" limit="8" as |hero_posts|}}
-                <section class="fq-editorial">
-                    {{!-- Center: Large hero (first post) --}}
-                    <div class="fq-editorial-center">
-                        {{#foreach hero_posts limit="1"}}
-                            <a class="fq-hero-card" href="{{url}}">
-                                {{#if feature_image}}
-                                    <div class="fq-card-image">
-                                        <img src="{{img_url feature_image size="xl"}}" alt="{{title}}" fetchpriority="high" loading="eager">
-                                    </div>
-                                {{/if}}
-                                <div class="fq-card-content">
-                                    {{#if primary_tag}}
-                                        <div class="fq-tags">
-                                            <span class="fq-tag">{{primary_tag.name}}</span>
+            {{!-- Featured Posts (default) --}}
+            <section class="fq-hero fq-hero-grid">
+                {{#get "posts" include="authors,tags" limit="4" as |hero_posts|}}
+                    {{#foreach hero_posts}}
+                        {{#if @first}}
+                            <div class="fq-main-post">
+                                <article class="fq-hero-post-large">
+                                    <a class="fq-hero-post-link" href="{{url}}">
+                                        {{#if feature_image}}
+                                            <img class="fq-hero-post-image" src="{{img_url feature_image size="xl"}}" alt="{{title}}" fetchpriority="high" loading="eager">
+                                        {{/if}}
+                                        <div class="fq-hero-post-content">
+                                            <div class="fq-hero-post-tags">
+                                                {{#if primary_tag}}
+                                                    <span class="fq-tag">{{primary_tag.name}}</span>
+                                                {{/if}}
+                                            </div>
+                                            <h2 class="fq-hero-post-title">{{title}}</h2>
+                                            <div class="fq-hero-post-meta">
+                                                <span class="fq-author">BY {{authors}}</span>
+                                                <time class="fq-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <div class="fq-sidebar-posts">
+                        {{else}}
+                            <article class="fq-hero-post-small">
+                                <a class="fq-hero-post-small-link" href="{{url}}">
+                                    {{#if feature_image}}
+                                        <div class="fq-hero-post-small-image-wrapper">
+                                            <img src="{{img_url feature_image size="s"}}" alt="{{title}}">
                                         </div>
                                     {{/if}}
-                                    <h2 class="fq-heading-xl"><a href="{{url}}">{{title}}</a></h2>
-                                    <div class="fq-byline">
-                                        <span>{{#foreach authors}}{{#if @first}}{{name}}{{/if}}{{/foreach}}</span>
-                                        <span>&middot;</span>
-                                        <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
+                                    <div class="fq-hero-post-small-content">
+                                        <h3 class="fq-hero-post-small-title">{{title}}</h3>
+                                        <div class="fq-hero-post-meta">
+                                            <span class="fq-author">BY {{authors}}</span>
+                                            <time class="fq-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        {{/foreach}}
-                    </div>
-
-                    {{!-- Left: 2 posts with thumbnails (posts 2-3) --}}
-                    <div class="fq-editorial-left">
-                        {{#foreach hero_posts from="2" limit="2"}}
-                            <a class="fq-side-card" href="{{url}}">
-                                {{#if feature_image}}
-                                    <div class="fq-card-image">
-                                        <img src="{{img_url feature_image size="s"}}" alt="{{title}}" loading="lazy">
-                                    </div>
-                                {{/if}}
-                                <div class="fq-card-content">
-                                    {{#if primary_tag}}
-                                        <div class="fq-tags"><span class="fq-tag">{{primary_tag.name}}</span></div>
-                                    {{/if}}
-                                    <h3 class="fq-heading-md"><a href="{{url}}">{{title}}</a></h3>
-                                    <div class="fq-byline">
-                                        <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
-                                    </div>
-                                </div>
-                            </a>
-                        {{/foreach}}
-                    </div>
-
-                    {{!-- Right: 5 text-only posts (posts 4-8) --}}
-                    <div class="fq-editorial-right">
-                        {{#foreach hero_posts from="4" limit="5"}}
-                            <a class="fq-text-card" href="{{url}}">
-                                <div class="fq-card-content">
-                                    {{#if primary_tag}}
-                                        <div class="fq-tags"><span class="fq-tag">{{primary_tag.name}}</span></div>
-                                    {{/if}}
-                                    <h3 class="fq-heading-sm"><a href="{{url}}">{{title}}</a></h3>
-                                    <div class="fq-byline">
-                                        <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
-                                    </div>
-                                </div>
-                            </a>
-                        {{/foreach}}
-                    </div>
-                </section>
-            {{/get}}
+                                </a>
+                            </article>
+                        {{/if}}
+                        {{#if @last}}
+                            </div>
+                        {{/if}}
+                    {{/foreach}}
+                {{/get}}
+            </section>
         {{/match}}
 
         {{!-- ========================================
-             LATEST SECTION + Feed Tabs
+             TAG-BASED FEED TABS + LATEST POSTS
+             @custom.enter_tag_slugs_for_primary_sections: comma-separated tag slugs shown as tabs (reused from primary sections setting)
              ======================================== --}}
-        <section class="fq-section" style="border-bottom: 1px solid var(--fq-border);">
-            <div class="fq-latest-header">
-                <h2 class="fq-latest-title">
+        <section class="gh-topic gh-topic-grid">
+            <div class="fq-feed-header">
+                <h2 class="gh-topic-name">
                     {{#match pagination.pages ">" 1}}
                         <a href="{{@site.url}}/page/2">{{t "Latest"}}</a>
                     {{else}}
@@ -142,160 +141,61 @@
                 {{/if}}
             </div>
 
-            <div class="fq-post-grid">
-                {{#foreach posts limit="8"}}
-                    <a class="fq-grid-card" href="{{url}}">
-                        {{#if feature_image}}
-                            <div class="fq-card-image">
-                                <img srcset="{{img_url feature_image size="s"}} 300w,
-                                        {{img_url feature_image size="m"}} 720w,
-                                        {{img_url feature_image size="l"}} 960w"
-                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
-                                        src="{{img_url feature_image size="s"}}"
-                                        alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
-                                        loading="lazy">
-                            </div>
-                        {{/if}}
-                        <div class="fq-card-content">
-                            {{#if primary_tag}}
-                                <div class="fq-tags"><span class="fq-tag">{{primary_tag.name}}</span></div>
-                            {{/if}}
-                            <h3 class="fq-heading-md"><a href="{{url}}">{{title}}</a></h3>
-                            <div class="fq-byline">
-                                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
-                            </div>
-                        </div>
-                    </a>
+            <div class="gh-topic-content">
+                {{#foreach posts limit="7"}}
+                    {{#match @custom.post_feed_layout "List"}}
+                        {{> "loop-list"}}
+                    {{else}}
+                        {{> "loop-grid"}}
+                    {{/match}}
                 {{/foreach}}
             </div>
 
-            {{#match pagination.pages ">" 1}}
-                <div style="text-align:center;padding-top:24px;">
-                    <a href="{{@site.url}}/page/2" class="fq-view-all">
-                        {{t "Show more"}}
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.25803e-06 7.28862L1.75227e-06 5.76562L10.4434 5.76562L5.76564 1.08784L6.8535 -1.70189e-05L13.3806 6.52712L6.8535 13.0543L5.76564 11.9664L10.4434 7.28862H2.25803e-06Z" fill="currentColor"/>
-                        </svg>
-                    </a>
-                </div>
-            {{/match}}
+            <footer class="gh-topic-footer">
+                {{#match pagination.pages ">" 1}}
+                    <a class="gh-topic-link" href="{{@site.url}}/page/2">{{t "Show more"}} {{> "icons/arrow"}}</a>
+                {{/match}}
+            </footer>
         </section>
 
-        {{!-- ========================================
-             TAG-BASED SECTIONS (Publisher-style)
-             Each section: header (tag name + View all) + 4-column grid
-             ======================================== --}}
         {{#if @custom.enter_tag_slugs_for_primary_sections}}
             {{#get "tags" filter="slug:[{{@custom.enter_tag_slugs_for_primary_sections}}]"}}
                 {{#foreach tags}}
-                    <section class="fq-section">
-                        <div class="fq-section-header">
-                            <h2 class="fq-section-title"><a href="{{url}}">{{name}}</a></h2>
-                            <a href="{{url}}" class="fq-view-all">
-                                View all
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2.25803e-06 7.28862L1.75227e-06 5.76562L10.4434 5.76562L5.76564 1.08784L6.8535 -1.70189e-05L13.3806 6.52712L6.8535 13.0543L5.76564 11.9664L10.4434 7.28862H2.25803e-06Z" fill="currentColor"/>
-                                </svg>
-                            </a>
-                        </div>
-                        <div class="fq-post-grid">
-                            {{#get "posts" include="tags,authors" filter="tag:{{slug}}" limit="4"}}
-                                {{#foreach posts}}
-                                    <a class="fq-grid-card" href="{{url}}">
-                                        {{#if feature_image}}
-                                            <div class="fq-card-image">
-                                                <img srcset="{{img_url feature_image size="s"}} 300w,
-                                                        {{img_url feature_image size="m"}} 720w"
-                                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
-                                                        src="{{img_url feature_image size="s"}}"
-                                                        alt="{{title}}"
-                                                        loading="lazy">
-                                            </div>
-                                        {{/if}}
-                                        <div class="fq-card-content">
-                                            {{#if primary_tag}}
-                                                <div class="fq-tags"><span class="fq-tag">{{primary_tag.name}}</span></div>
-                                            {{/if}}
-                                            <h3 class="fq-heading-md"><a href="{{url}}">{{title}}</a></h3>
-                                            <div class="fq-byline">
-                                                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
-                                            </div>
-                                        </div>
-                                    </a>
-                                {{/foreach}}
-                            {{/get}}
-                        </div>
-                    </section>
+                    {{> "topic-grid"}}
                 {{/foreach}}
             {{/get}}
         {{else}}
             {{#match posts.length ">" 1}}
                 {{#get "tags" include="count.posts" order="count.posts desc" limit="3"}}
                     {{#foreach tags}}
-                        <section class="fq-section">
-                            <div class="fq-section-header">
-                                <h2 class="fq-section-title"><a href="{{url}}">{{name}}</a></h2>
-                                <a href="{{url}}" class="fq-view-all">
-                                    View all
-                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.25803e-06 7.28862L1.75227e-06 5.76562L10.4434 5.76562L5.76564 1.08784L6.8535 -1.70189e-05L13.3806 6.52712L6.8535 13.0543L5.76564 11.9664L10.4434 7.28862H2.25803e-06Z" fill="currentColor"/>
-                                    </svg>
-                                </a>
-                            </div>
-                            <div class="fq-post-grid">
-                                {{#get "posts" include="tags,authors" filter="tag:{{slug}}" limit="4"}}
-                                    {{#foreach posts}}
-                                        <a class="fq-grid-card" href="{{url}}">
-                                            {{#if feature_image}}
-                                                <div class="fq-card-image">
-                                                    <img src="{{img_url feature_image size="s"}}" alt="{{title}}" loading="lazy">
-                                                </div>
-                                            {{/if}}
-                                            <div class="fq-card-content">
-                                                {{#if primary_tag}}
-                                                    <div class="fq-tags"><span class="fq-tag">{{primary_tag.name}}</span></div>
-                                                {{/if}}
-                                                <h3 class="fq-heading-md"><a href="{{url}}">{{title}}</a></h3>
-                                                <div class="fq-byline">
-                                                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM DD, YYYY"}}</time>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    {{/foreach}}
-                                {{/get}}
-                            </div>
-                        </section>
+                        {{> "topic-grid"}}
                     {{/foreach}}
                 {{/get}}
             {{/match}}
         {{/if}}
 
-        {{!-- Secondary sections (minimal list) --}}
         {{#if @custom.enter_tag_slugs_for_secondary_sections}}
             {{#get "tags" filter="slug:[{{@custom.enter_tag_slugs_for_secondary_sections}}]"}}
                 {{#if tags}}
-                    <section class="fq-section" style="border-bottom: none;">
-                        <div class="fq-section-header">
-                            <h2 class="fq-section-title">{{t "More"}}</h2>
-                        </div>
-                        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;">
-                            {{#foreach tags}}
-                                <div>
-                                    <h3 style="font-size:18px;font-weight:700;margin:0 0 12px;">
-                                        <a href="{{url}}" style="text-decoration:none;color:var(--fq-text);">{{name}}</a>
-                                    </h3>
-                                    {{#get "posts" include="tags,authors" filter="tag:{{slug}}" limit="4"}}
-                                        {{#foreach posts}}
-                                            <a href="{{url}}" style="display:block;padding:10px 0;border-bottom:1px solid var(--fq-border-card);text-decoration:none;color:var(--fq-text);font-size:14px;font-weight:600;transition:color 0.3s ease;" onmouseover="this.style.color='var(--fq-accent)'" onmouseout="this.style.color='var(--fq-text)'">{{title}}</a>
-                                        {{/foreach}}
-                                    {{/get}}
-                                </div>
-                            {{/foreach}}
-                        </div>
-                    </section>
+                    <div class="gh-topic-list">
+                        {{#foreach tags}}
+                            {{> "topic-minimal"}}
+                        {{/foreach}}
+                    </div>
                 {{/if}}
             {{/get}}
+        {{else}}
+            {{#match posts.length ">" 1}}
+                {{#get "tags" include="count.posts" order="count.posts desc"}}
+                    {{#if tags.[3]}}
+                        <div class="gh-topic-list">
+                            {{#foreach tags from="4" limit="3"}}
+                                {{> "topic-minimal"}}
+                            {{/foreach}}
+                        </div>
+                    {{/if}}
+                {{/get}}
+            {{/match}}
         {{/if}}
-
     </div>
 </main>
