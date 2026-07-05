@@ -461,8 +461,10 @@
 }
 
 /* Dark mode logo */
-[data-theme="dark"] .gh-head-logo-light { display: none !important; }
+/* Only hide the light logo in dark mode if a dark alternative is actually set (has-dark-alt class) */
+[data-theme="dark"] .gh-head-logo-light.has-dark-alt { display: none !important; }
 [data-theme="dark"] .gh-head-logo-dark { display: block !important; }
+.gh-head-logo-dark { display: none; }
 [data-theme="dark"] .is-head-transparent .gh-head-logo img { filter: none; }
 
 /* Dark mode subscribe section */
