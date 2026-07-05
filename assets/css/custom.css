@@ -116,9 +116,10 @@
 /* 8. 強制 Hero Grid 佈局 (2.5fr 1fr) */
 .fq-hero-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 30px;
-    margin: 40px 0 60px;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 24px;
+    margin: 32px 0 56px;
+    align-items: stretch;
 }
 
 .fq-main-post { position: relative; }
@@ -182,20 +183,39 @@
 .fq-sidebar-posts {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 0;
+    height: 100%;
+}
+
+.fq-hero-post-small {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.fq-hero-post-small:first-child {
+    padding-top: 0;
+}
+
+.fq-hero-post-small:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .fq-hero-post-small-link {
     display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 15px;
+    grid-template-columns: 120px 1fr;
+    gap: 16px;
     text-decoration: none;
     color: inherit;
+    width: 100%;
 }
 
 .fq-hero-post-small-image-wrapper {
-    height: 80px;
-    border-radius: 4px;
+    height: 90px;
+    border-radius: 6px;
     overflow: hidden;
 }
 
@@ -205,10 +225,10 @@
 }
 
 .fq-hero-post-small-title {
-    font-size: 17px;
-    line-height: 1.3;
+    font-size: 16px;
+    line-height: 1.35;
     font-weight: 700;
-    margin: 0 0 8px;
+    margin: 0 0 6px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -259,7 +279,8 @@
     .gh-head-logo img { height: 32px; }
     .fq-hero-post-large { height: 400px; }
     .fq-hero-post-title { font-size: 30px; }
-    .fq-hero-post-small-link { grid-template-columns: 90px 1fr; }
+    .fq-hero-post-small-link { grid-template-columns: 100px 1fr; }
+    .fq-hero-post-small { padding: 12px 0; }
     .fq-collection-grid { grid-template-columns: 1fr; }
     .gh-foot { padding: 40px 0 30px; }
 }
