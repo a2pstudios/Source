@@ -121,9 +121,7 @@
     margin: 40px 0 60px;
 }
 
-.fq-main-post {
-    position: relative;
-}
+.fq-main-post { position: relative; }
 
 .fq-hero-post-large {
     position: relative;
@@ -135,10 +133,7 @@
 
 .fq-hero-post-image {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     object-fit: cover;
     opacity: 0.7;
     transition: transform 0.5s ease;
@@ -150,18 +145,14 @@
 
 .fq-hero-post-content {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    bottom: 0; left: 0; width: 100%;
     padding: 40px;
     background: linear-gradient(transparent, rgba(0,0,0,0.9));
     color: #fff;
     z-index: 2;
 }
 
-.fq-hero-post-tags {
-    margin-bottom: 12px;
-}
+.fq-hero-post-tags { margin-bottom: 12px; }
 
 .fq-tag {
     background: #14467c;
@@ -209,8 +200,7 @@
 }
 
 .fq-hero-post-small-image-wrapper img {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
 }
 
@@ -226,9 +216,7 @@
 }
 
 /* 9. Collection Sections */
-.fq-collection {
-    margin-bottom: 60px;
-}
+.fq-collection { margin-bottom: 60px; }
 
 .fq-collection-header {
     display: flex;
@@ -239,18 +227,8 @@
     padding-bottom: 10px;
 }
 
-.fq-collection-title {
-    font-size: 26px;
-    font-weight: 800;
-    margin: 0;
-}
-
-.fq-collection-view-all {
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    color: #000;
-}
+.fq-collection-title { font-size: 26px; font-weight: 800; margin: 0; }
+.fq-collection-view-all { font-size: 13px; font-weight: 700; text-decoration: none; color: #000; }
 
 .fq-collection-grid {
     display: grid;
@@ -258,10 +236,7 @@
     gap: 25px;
 }
 
-.fq-grid-post-link {
-    text-decoration: none;
-    color: inherit;
-}
+.fq-grid-post-link { text-decoration: none; color: inherit; }
 
 .fq-grid-post-image-wrapper {
     aspect-ratio: 16/9;
@@ -270,57 +245,23 @@
     margin-bottom: 15px;
 }
 
-.fq-grid-post-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.fq-grid-post-tag {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #14467c;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.fq-grid-post-title {
-    font-size: 18px;
-    line-height: 1.4;
-    font-weight: 700;
-    margin: 0 0 10px;
-}
+.fq-grid-post-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.fq-grid-post-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #14467c; display: block; margin-bottom: 8px; }
+.fq-grid-post-title { font-size: 18px; line-height: 1.4; font-weight: 700; margin: 0 0 10px; }
 
 /* 10. 手機版適應 (RWD) */
 @media (max-width: 1024px) {
-    .fq-hero-grid {
-        grid-template-columns: 1fr;
-    }
-    .fq-collection-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .fq-hero-grid { grid-template-columns: 1fr; }
+    .fq-collection-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 767px) {
-    .gh-head-logo img {
-        height: 32px;
-    }
-    .fq-hero-post-large {
-        height: 400px;
-    }
-    .fq-hero-post-title {
-        font-size: 30px;
-    }
-    .fq-hero-post-small-link {
-        grid-template-columns: 90px 1fr;
-    }
-    .fq-collection-grid {
-        grid-template-columns: 1fr;
-    }
-    .gh-foot {
-        padding: 40px 0 30px;
-    }
+    .gh-head-logo img { height: 32px; }
+    .fq-hero-post-large { height: 400px; }
+    .fq-hero-post-title { font-size: 30px; }
+    .fq-hero-post-small-link { grid-template-columns: 90px 1fr; }
+    .fq-collection-grid { grid-template-columns: 1fr; }
+    .gh-foot { padding: 40px 0 30px; }
 }
 
 /* 自動切換 Logo 顏色 */
@@ -335,4 +276,327 @@
     font-weight: 400;
     font-display: swap;
     src: url('https://cdn.enit.fr/assets/fontawesome/6.5.2/webfonts/fa-brands-400.woff2') format('woff2');
+}
+
+/* ========================================
+   11. Multi-level Dropdown Navigation (Enova-style)
+   ======================================== */
+.gh-nav-item { position: relative; }
+.gh-nav-item > a { display: inline-flex; align-items: center; gap: 4px; }
+
+.gh-nav-item.has-dropdown > a::after {
+    content: ""; display: inline-block; width: 0; height: 0; margin-left: 4px;
+    border-left: 4px solid transparent; border-right: 4px solid transparent;
+    border-top: 4px solid currentColor; transition: transform 0.2s ease;
+}
+
+.gh-nav-item.has-dropdown:hover > a::after { transform: rotate(180deg); }
+
+.gh-nav-dropdown {
+    position: absolute; top: 100%; left: 0; min-width: 180px;
+    padding: 8px 0; margin: 0; background: #fff; border-radius: 6px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12); list-style: none;
+    opacity: 0; visibility: hidden; transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    z-index: 1000;
+}
+
+.gh-nav-item.has-dropdown:hover .gh-nav-dropdown,
+.gh-nav-item.has-dropdown:focus-within .gh-nav-dropdown {
+    opacity: 1; visibility: visible; transform: translateY(0);
+}
+
+.gh-nav-dropdown li { list-style: none; }
+
+.gh-nav-dropdown li a {
+    display: block; padding: 8px 20px; font-size: 1.4rem;
+    color: var(--color-darker-gray, #333) !important;
+    text-decoration: none; white-space: nowrap;
+    transition: background 0.15s ease;
+}
+
+.gh-nav-dropdown li a:hover {
+    background: var(--color-lighter-gray, #f5f5f5);
+}
+
+.gh-nav-dropdown li a[data-external="true"]::after {
+    content: " ↗"; font-size: 1.1rem; opacity: 0.5;
+}
+
+@media (max-width: 767px) {
+    .gh-nav-dropdown {
+        position: static; opacity: 1; visibility: visible; transform: none;
+        box-shadow: none; background: transparent; padding-left: 16px; display: none;
+    }
+    .gh-nav-item.has-dropdown.expanded .gh-nav-dropdown { display: block; }
+    .gh-nav-item.has-dropdown > a::after { transform: rotate(-90deg); }
+    .gh-nav-item.has-dropdown.expanded > a::after { transform: rotate(0deg); }
+    .gh-nav-dropdown li a { color: inherit !important; padding: 6px 16px; font-size: 1.3rem; }
+}
+
+/* ========================================
+   12. Footer Secondary Navigation with Grouped Columns
+   ======================================== */
+.footer-secondary-nav { margin-bottom: 24px; }
+.footer-secondary-nav:not(.footer-nav-processed) .footer-nav-item { display: none; }
+
+.footer-secondary-nav.footer-nav-processed {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 32px 48px;
+}
+
+.footer-nav-column {
+    display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 120px;
+}
+
+.footer-nav-column-title {
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.7) !important; margin-bottom: 4px;
+}
+
+.footer-nav-column a {
+    color: #ffffff !important; font-size: 14px; text-decoration: none; transition: opacity 0.2s ease;
+}
+
+.footer-nav-column a:hover { opacity: 0.7; }
+.footer-nav-column a[data-external="true"]::after { content: " ↗"; font-size: 11px; opacity: 0.5; }
+
+.footer-secondary-nav.footer-nav-processed[data-layout="single"] {
+    flex-direction: row; justify-content: center; gap: 15px 25px; font-size: 14px; font-weight: 500;
+}
+
+.footer-secondary-nav.footer-nav-processed[data-layout="single"] a {
+    color: #ffffff !important; text-decoration: none; transition: opacity 0.2s ease;
+}
+
+.footer-secondary-nav.footer-nav-processed[data-layout="single"] a:hover {
+    opacity: 0.7; text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+    .footer-secondary-nav.footer-nav-processed { gap: 24px 32px; }
+    .footer-secondary-nav.footer-nav-processed[data-layout="columns"] {
+        flex-direction: column; gap: 20px;
+    }
+    .footer-nav-column { align-items: center; }
+}
+
+/* ========================================
+   13. Dark Mode (Color Scheme)
+   ======================================== */
+[data-theme="dark"] {
+    --color-darker-gray: #e8e8ec;
+    --color-dark-gray: #d4d4dc;
+    --color-mid-gray: #9494a4;
+    --color-light-gray: #2a2a35;
+    --color-lighter-gray: #1c1c24;
+    --color-white: #18181b;
+    --color-primary-text: var(--color-darker-gray);
+    --color-secondary-text: var(--color-mid-gray);
+    --color-border: #2e2e38;
+    --color-black: #f0f0f5;
+    color-scheme: dark;
+}
+
+/* Dark mode body & background */
+[data-theme="dark"] body {
+    background-color: var(--color-white);
+    color: var(--color-primary-text);
+}
+
+/* Dark mode header */
+[data-theme="dark"] .gh-head {
+    background-color: var(--color-white);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] body:not(.is-head-stacked) .gh-head-inner {
+    border-bottom-color: var(--color-border);
+}
+
+/* Dark mode cards */
+[data-theme="dark"] .gh-card,
+[data-theme="dark"] .gh-topic-grid .gh-card.featured.no-image.large .gh-card-link {
+    background: var(--color-lighter-gray);
+}
+
+[data-theme="dark"] .gh-topic-grid .gh-card.large,
+[data-theme="dark"] .gh-topic-grid .gh-card:not(:only-child).large {
+    border-bottom-color: var(--color-border);
+}
+
+[data-theme="dark"] .gh-topic-grid .gh-topic-name {
+    color: var(--color-primary-text);
+}
+
+[data-theme="dark"] .gh-topic-footer {
+    border-top-color: var(--color-border);
+}
+
+/* Dark mode hero & collection sections */
+[data-theme="dark"] .fq-collection-header {
+    border-bottom-color: var(--color-border);
+}
+
+[data-theme="dark"] .fq-collection-title,
+[data-theme="dark"] .fq-collection-view-all {
+    color: var(--color-primary-text);
+}
+
+[data-theme="dark"] .fq-grid-post-tag {
+    color: var(--ghost-accent-color, #5b9bd5);
+}
+
+[data-theme="dark"] .fq-grid-post-title {
+    color: var(--color-primary-text);
+}
+
+/* Dark mode dropdown */
+[data-theme="dark"] .gh-nav-dropdown {
+    background: var(--color-lighter-gray);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .gh-nav-dropdown li a:hover {
+    background: var(--color-light-gray);
+}
+
+/* Dark mode logo */
+[data-theme="dark"] .gh-head-logo-light { display: none !important; }
+[data-theme="dark"] .gh-head-logo-dark { display: block !important; }
+[data-theme="dark"] .is-head-transparent .gh-head-logo img { filter: none; }
+
+/* Dark mode subscribe section */
+[data-theme="dark"] .gh-subscribe {
+    border-bottom-color: var(--color-border);
+}
+
+/* Dark mode post content */
+[data-theme="dark"] .gh-content {
+    color: var(--color-primary-text);
+}
+
+[data-theme="dark"] .gh-canvas,
+[data-theme="dark"] .gh-main {
+    color: var(--color-primary-text);
+}
+
+/* Dark mode footer stays blue */
+[data-theme="dark"] .gh-foot {
+    background-color: #0d2d52 !important;
+}
+
+/* Theme toggle button */
+.gh-theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    color: inherit;
+    transition: opacity 0.2s ease;
+}
+
+.gh-theme-toggle:hover { opacity: 0.7; }
+
+.gh-theme-toggle-sun { display: block; }
+.gh-theme-toggle-moon { display: none; }
+
+[data-theme="dark"] .gh-theme-toggle-sun { display: none; }
+[data-theme="dark"] .gh-theme-toggle-moon { display: block; }
+
+@media (max-width: 767px) {
+    .gh-theme-toggle { padding: 6px; }
+}
+
+/* ========================================
+   14. Post Feed List Layout
+   ======================================== */
+.is-feed-list .gh-topic-content {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+}
+
+.is-feed-list .gh-card-list {
+    width: 100%;
+    max-width: 100% !important;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-light-gray);
+}
+
+.is-feed-list .gh-card-list:last-child {
+    border-bottom: none;
+}
+
+.is-feed-list .gh-card-list .gh-card-link {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.is-feed-list .gh-card-list .gh-card-image {
+    flex-shrink: 0;
+    width: 200px;
+    margin: 0;
+}
+
+.is-feed-list .gh-card-list .gh-card-image::before {
+    display: block;
+    padding-bottom: 60%;
+    content: "";
+}
+
+.is-feed-list .gh-card-list .gh-card-image img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.is-feed-list .gh-card-list .gh-card-wrapper {
+    flex: 1;
+}
+
+.is-feed-list .gh-card-list .gh-card-title {
+    font-size: 2rem;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+}
+
+.is-feed-list .gh-card-list .gh-card-excerpt {
+    margin-top: 8px;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    color: var(--color-secondary-text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.is-feed-list .gh-card-list .gh-card-footer {
+    margin-top: 12px;
+}
+
+@media (max-width: 767px) {
+    .is-feed-list .gh-card-list .gh-card-link {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .is-feed-list .gh-card-list .gh-card-image {
+        width: 100%;
+    }
+
+    .is-feed-list .gh-card-list .gh-card-image::before {
+        padding-bottom: 56.25%;
+    }
+
+    .is-feed-list .gh-card-list .gh-card-title {
+        font-size: 1.7rem;
+    }
 }
