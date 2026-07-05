@@ -1,7 +1,7 @@
 {
     "name": "fqpedia-headline",
     "description": "A Ghost theme",
-    "version": "1.1.3",
+    "version": "1.2.0",
     "private": true,
     "engines": {
         "ghost": ">=5.0.0"
@@ -53,6 +53,49 @@
             "email_signup_text": {
                 "type": "text",
                 "default": "Don't miss out on the latest news. Sign up now to get access to the library of members-only articles."
+            },
+            "hero_layout": {
+                "type": "select",
+                "options": ["Featured Posts", "Email Subscription", "Call to Action", "Personal Bio"],
+                "default": "Featured Posts",
+                "group": "homepage",
+                "label": "Hero Layout"
+            },
+            "hero_headline": {
+                "type": "text",
+                "group": "homepage",
+                "label": "Hero Headline"
+            },
+            "hero_subheadline": {
+                "type": "text",
+                "group": "homepage",
+                "label": "Hero Subheadline"
+            },
+            "hero_primary_button_text": {
+                "type": "text",
+                "group": "homepage",
+                "label": "Hero Primary Button Text",
+                "default": "Subscribe"
+            },
+            "hero_secondary_button_text": {
+                "type": "text",
+                "group": "homepage",
+                "label": "Hero Secondary Button Text"
+            },
+            "hero_secondary_button_link": {
+                "type": "text",
+                "group": "homepage",
+                "label": "Hero Secondary Button Link"
+            },
+            "hero_author_slug": {
+                "type": "text",
+                "group": "homepage",
+                "label": "Hero Author Slug (Personal Bio)"
+            },
+            "home_feed_tags": {
+                "type": "text",
+                "group": "homepage",
+                "label": "Home Feed Tags (comma-separated slugs)"
             },
             "enter_tag_slugs_for_primary_sections": {
                 "type": "text",
