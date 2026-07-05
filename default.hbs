@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{@site.locale}}">
+<html lang="{{@site.locale}}" data-theme="light">
 
 <head>
     <link rel="preload" href="https://fonts.bunny.net/css?family=Manrope:400,500,600,700,800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -8,15 +8,34 @@
     <title>{{meta_title page=(t " (Page %)")}}</title>
     <link rel="stylesheet" href="{{asset "built/screen.css"}}">
     <link rel="stylesheet" href="{{asset "css/custom.css"}}">
-    {{!-- Font Awesome removed for PageSpeed optimization --}}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-77SJ3C7RN2"></script>
     <script defer src="{{asset "js/custom.js"}}"></script>
+
+    {{!-- Prevent dark mode flash: set theme before render --}}
+    <script>
+    (function() {
+        var scheme = '{{@custom.color_scheme}}';
+        var stored = null;
+        try { stored = localStorage.getItem('fq-color-scheme'); } catch(e) {}
+        var theme = 'light';
+        if (scheme === 'Dark') {
+            theme = 'dark';
+        } else if (scheme === 'Light') {
+            theme = 'light';
+        } else if (stored === 'dark' || stored === 'light') {
+            theme = stored;
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            theme = 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+    })();
+    </script>
 
     {{ghost_head}}
 </head>
 
-<body class="{{body_class}}{{{block "body_class"}}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}{{#is "tag"}}{{#if tag.feature_image}} is-head-transparent{{/if}}{{/is}}{{#match @custom.header_style "Accent color"}} is-head-brand{{/match}}{{#match @custom.header_style "Dark"}} is-head-dark{{/match}}">
-<!-- FQPEDIA_VER_1.1.0 -->
+<body class="{{body_class}}{{{block "body_class"}}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}{{#is "tag"}}{{#if tag.feature_image}} is-head-transparent{{/if}}{{/is}}{{#match @custom.header_style "Accent color"}} is-head-brand{{/match}}{{#match @custom.header_style "Dark"}} is-head-dark{{/match}} is-feed-{{#match @custom.post_feed_layout "List"}}list{{else}}grid{{/match}} is-color-scheme-{{#match @custom.color_scheme "Dark"}}dark{{else match @custom.color_scheme "Light"}}light{{else}}system{{/match}}">
+<!-- FQPEDIA_VER_1.2.0 -->
 
 {{!-- TradingView Ticker Disabled --}}
 {{!-- <div class="tradingview-widget-container" id="tv-ticker-wrapper">
@@ -31,11 +50,20 @@
                 <div class="gh-head-brand-wrapper">
                     {{#is "home"}}<h1 class="gh-head-logo">{{/is}}
                     <a {{^is "home"}}class="gh-head-logo"{{/is}} href="{{@site.url}}">
-                        <img src="{{asset "images/FQpedia-logo-2026.svg"}}" alt="{{@site.title}}">
+                        <img class="gh-head-logo-light" src="{{asset "images/FQpedia-logo-2026.svg"}}" alt="{{@site.title}}">
+                        {{#if @custom.dark_mode_logo}}
+                            <img class="gh-head-logo-dark" src="{{@custom.dark_mode_logo}}" alt="{{@site.title}}" style="display:none;">
+                        {{/if}}
                     </a>
                     {{#is "home"}}</h1>{{/is}}
                 </div>
                 <button class="gh-search gh-icon-btn" aria-label="{{t "Search this site"}}" data-ghost-search>{{> "icons/search"}}</button>
+                {{#match @custom.color_scheme "System"}}
+                <button class="gh-theme-toggle gh-icon-btn" aria-label="Toggle dark mode" title="切換深色模式">
+                    <svg class="gh-theme-toggle-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="gh-theme-toggle-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                {{/match}}
                 <button class="gh-burger" aria-label="{{t "Toggle menu"}}"></button>
             </div>
 
@@ -53,8 +81,20 @@
                     {{^match @custom.navigation_layout "Stacked"}}
                         <button class="gh-search gh-icon-btn" aria-label="{{t "Search this site"}}" data-ghost-search>{{> "icons/search"}}</button>
                     {{/match}}
+                    {{#match @custom.color_scheme "System"}}
+                    <button class="gh-theme-toggle gh-icon-btn" aria-label="Toggle dark mode" title="切換深色模式">
+                        <svg class="gh-theme-toggle-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        <svg class="gh-theme-toggle-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                    {{/match}}
                 {{else}}
                     <button class="gh-search gh-icon-btn" aria-label="{{t "Search this site"}}" data-ghost-search>{{> "icons/search"}}</button>
+                    {{#match @custom.color_scheme "System"}}
+                    <button class="gh-theme-toggle gh-icon-btn" aria-label="Toggle dark mode" title="切換深色模式">
+                        <svg class="gh-theme-toggle-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        <svg class="gh-theme-toggle-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                    {{/match}}
                     <div class="gh-head-members">
                         {{#unless @member}}
                             {{#unless @site.members_invite_only}}
@@ -117,7 +157,6 @@
                 </div>
 
                 {{!-- Secondary navigation with grouped column support --}}
-                {{!-- Hash-prefixed labels (# Group) become column headers; parsed by JS --}}
                 <nav class="footer-secondary-nav" id="gh-footer-nav">
                 {{#foreach @site.secondary_navigation}}
                     <span class="footer-nav-item" data-nav-label="{{label}}" data-nav-url="{{url}}">
